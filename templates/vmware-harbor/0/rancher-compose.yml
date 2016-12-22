@@ -3,17 +3,17 @@ version: '2'
   name: Harbor
   version: 0.5.0-rancher1
   description: |
-    (Experimental) Harbor DevNull
+    Enterprise Class Registry by VMware
   minimum_rancher_version: v0.59.0
   uuid: harbor-0
   questions:
-    - variable: "harbor_fqdn"
+    - variable: "harborhostname"
       description: "Harbor fqdn to acces it"
       label: "Harbor fqdn:"
       required: true
       default: harbor.mycompany.com
       type: "string"
-    - variable: "harbor_pass" 
+    - variable: "harbor_admin_password" 
       label: "Harbor password:"
       description: |
         Harbor admin password
