@@ -3,7 +3,7 @@ version: '2'
   name: Harbor
   version: 0.5.0-rancher1
   description: |
-    (Experimental) Harbor
+    (Experimental) Harbor DevNull
   minimum_rancher_version: v0.59.0
   uuid: harbor-0
   questions:
