@@ -11,7 +11,7 @@ version: '2'
       description: "Harbor fqdn to acces it"
       label: "Harbor fqdn:"
       required: true
-      default: pod4.vmug.it
+      default: myharbor.mycompany.com
       type: "string"
     - variable: "harbor_pass" 
       label: "Harbor password:"
