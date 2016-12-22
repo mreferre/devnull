@@ -151,5 +151,5 @@ services:
       io.rancher.container.hostname_override: container_name
       io.rancher.sidekicks: harbor-setupwrapper
       traefik.domain: local
-      traefik.port: '80'
-      traefik.enable: 'true'
+      traefik.port: 80
+      traefik.enable: true
