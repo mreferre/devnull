@@ -153,4 +153,4 @@ services:
       traefik.alias: myharbor
       traefik.domain: mycompany.com
       traefik.port: 80
-      traefik.enable: true
+      traefik.enable: stack
