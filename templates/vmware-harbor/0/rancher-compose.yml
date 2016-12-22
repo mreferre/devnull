@@ -11,7 +11,7 @@ version: '2'
       description: "Harbor fqdn to acces it"
       label: "Harbor fqdn:"
       required: true
-      default: myharbor.mycompany.com
+      default: harbor.mycompany.com
       type: "string"
     - variable: "harbor_pass" 
       label: "Harbor password:"
