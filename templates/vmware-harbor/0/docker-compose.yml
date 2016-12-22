@@ -4,8 +4,8 @@ services:
     image: mreferre/harbor-setupwrapper
     container_name: harbor-setupwrapper
     environment:
-      - HARBORHOSTNAME= ${harborhostname}
-      - HARBOR_ADMIN_PASSWORD= ${harbor_admin_password}
+      - HARBORHOSTNAME=${harborhostname}
+      - HARBOR_ADMIN_PASSWORD=${harbor_admin_password}
     volumes:
       - /etc/registry
       - /etc/ui
