@@ -154,7 +154,7 @@ services:
     labels:
       io.rancher.container.hostname_override: container_name
       io.rancher.sidekicks: harbor-setupwrapper
-      traefik.alias: ${harborhostname}
-      traefik.domain:
+      traefik.alias: container_name
+      traefik.domain: myorg.com
       traefik.port: 80
       traefik.enable: stack
