@@ -46,6 +46,7 @@ services:
       ["serve", "/etc/registry/config.yml"]
     depends_on:
       - log
+      - harbor-setupwrapper
     logging:
       driver: "syslog"
       options:  
@@ -64,6 +65,7 @@ services:
       - harbor-setupwrapper
     depends_on:
       - log
+      - harbor-setupwrapper
     logging:
       driver: "syslog"
       options:  
@@ -87,6 +89,7 @@ services:
       - harbor-setupwrapper
     depends_on:
       - log
+      - harbor-setupwrapper
     logging:
       driver: "syslog"
       options:  
@@ -110,6 +113,9 @@ services:
     volumes:
       - /data/job_logs:/var/log/jobs
     volumes_from:
+      - harbor-setupwrapper
+    depends_on:
+      - log
       - harbor-setupwrapper
     external_links:
       - registry:registry
@@ -139,6 +145,7 @@ services:
       - harbor-setupwrapper
     depends_on:
       - log
+      - harbor-setupwrapper
     external_links:
       - registry
       - ui
