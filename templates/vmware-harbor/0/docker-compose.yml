@@ -114,9 +114,6 @@ services:
       - /data/job_logs:/var/log/jobs
     volumes_from:
       - harbor-setupwrapper
-    depends_on:
-      - log
-      - harbor-setupwrapper
     external_links:
       - registry:registry
       - ui:ui
