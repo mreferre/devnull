@@ -114,6 +114,9 @@ services:
       - /data/job_logs:/var/log/jobs
     volumes_from:
       - harbor-setupwrapper
+    depends_on:
+      - log
+      - harbor-setupwrapper
     external_links:
       - registry:registry
       - ui:ui
@@ -154,7 +157,7 @@ services:
     labels:
       io.rancher.container.hostname_override: container_name
       io.rancher.sidekicks: harbor-setupwrapper
-      traefik.alias: container_name
+      traefik.alias: ${harborhostname}
       traefik.domain: myorg.com
       traefik.port: 80
       traefik.enable: stack
