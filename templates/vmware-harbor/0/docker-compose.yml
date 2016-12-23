@@ -150,7 +150,7 @@ services:
     labels:
       io.rancher.container.hostname_override: container_name
       io.rancher.sidekicks: harbor-setupwrapper
-      traefik.alias: container_name
-      traefik.domain: test.com
+      traefik.alias: ${harborhostname}
+      traefik.domain: 
       traefik.port: 80
       traefik.enable: stack
