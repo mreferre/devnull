@@ -3,22 +3,28 @@ version: '2'
   name: Harbor
   version: 0.5.0-rancher1
   description: |
-    Enterprise Class Registry by VMware
+    Enterprise Class Container Registry by VMware
   minimum_rancher_version: v0.59.0
   uuid: harbor-0
   questions:
     - variable: "harborhostname"
-      description: "Harbor fqdn to acces it"
-      label: "Harbor fqdn:"
+      description: "Harbor IP, HOSTNAME or FQDN as used to acces it from the Docker CLI"
+      label: "IP/Hostname/FQDN:"
       required: true
-      default: harbor.mycompany.com
+      default: myregistry
       type: "string"
-    - variable: "harbor_admin_password" 
+    - variable: "harbor_admin_password"
       label: "Harbor password:"
       description: |
         Harbor admin password
       default: Vmware123!
       required: true
+      type: "string"
+    - variable: "traefikdomain"
+      description: "Harbor domain name (if you are using Traefik you should call out the domain here and the harbor host name should just represent the hostname)"
+      label: "(Traefik) domain:"
+      required: false
+      default: 
       type: "string"
 services:
   registry:
@@ -33,7 +39,7 @@ services:
       initializing_timeout: 60000
       interval: 2000
       strategy: recreate
-      request_line: 
+      request_line:
   jobservice:
     scale: 1
   ui:
