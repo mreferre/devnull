@@ -54,7 +54,7 @@ services:
         tag: "registry"
     labels:
       io.rancher.container.hostname_override: container_name
-      io.rancher.sidekicks: harbor-setupwrapper
+      #io.rancher.sidekicks: harbor-setupwrapper
   mysql:
     image: vmware/harbor-db:0.5.0
     container_name: harbor-db
@@ -78,7 +78,7 @@ services:
       - /configdb/entrypointdb.sh
     labels:
       io.rancher.container.hostname_override: container_name
-      io.rancher.sidekicks: harbor-setupwrapper
+      #io.rancher.sidekicks: harbor-setupwrapper
   ui:
     image: vmware/harbor-ui:0.5.0
     container_name: harbor-ui
@@ -105,7 +105,7 @@ services:
       - mysql
     labels:
       io.rancher.container.hostname_override: container_name
-      io.rancher.sidekicks: harbor-setupwrapper
+      #io.rancher.sidekicks: harbor-setupwrapper
   jobservice:
     image: vmware/harbor-jobservice:0.5.0
     container_name: harbor-jobservice
@@ -136,7 +136,7 @@ services:
       - mysql
     labels:
       io.rancher.container.hostname_override: container_name
-      io.rancher.sidekicks: harbor-setupwrapper
+      #io.rancher.sidekicks: harbor-setupwrapper
   proxy:
     image: nginx:1.11.5
     container_name: nginx
@@ -156,7 +156,7 @@ services:
         tag: "proxy"
     labels:
       io.rancher.container.hostname_override: container_name
-      io.rancher.sidekicks: harbor-setupwrapper
+      #io.rancher.sidekicks: harbor-setupwrapper
       traefik.alias: ${harborhostname}
       traefik.port: 80
       traefik.domain: ${traefikdomain}
