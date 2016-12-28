@@ -7,13 +7,10 @@ services:
       - HARBORHOSTNAME=${harborhostname}${traefikdomain}
       - HARBOR_ADMIN_PASSWORD=${harbor_admin_password}
     volumes:
-      - /etc/registry
-      - /etc/ui
-      - /etc/jobservice
-      - /etc/nginx
-      - /configdb
-      - /configui
-      - /configjobservice
+      - etc:/etc
+      - configdb:/configdb
+      - configui:/configui
+      - configjobservice:/configjobservice
     command: ["/harbor/harbor-setupwrapper.sh"]
     network_mode: "none"
     labels:
@@ -38,8 +35,10 @@ services:
     restart: always
     volumes:
       - /data/registry:/storage
-    volumes_from:
-      - harbor-setupwrapper
+      - etc:/etc
+      - configdb:/configdb
+      - configui:/configui
+      - configjobservice:/configjobservice
     environment:
       - GODEBUG=netdns=cgo
     command:
@@ -61,8 +60,10 @@ services:
     restart: always
     volumes:
       - /data/database:/var/lib/mysql
-    volumes_from:
-      - harbor-setupwrapper
+      - etc:/etc
+      - configdb:/configdb
+      - configui:/configui
+      - configjobservice:/configjobservice
     depends_on:
       - log
       - harbor-setupwrapper
@@ -85,8 +86,10 @@ services:
     restart: always
     volumes:
       - /data:/harbor_storage
-    volumes_from:
-      - harbor-setupwrapper
+      - etc:/etc
+      - configdb:/configdb
+      - configui:/configui
+      - configjobservice:/configjobservice
     depends_on:
       - log
       - harbor-setupwrapper
@@ -112,8 +115,10 @@ services:
     restart: always
     volumes:
       - /data/job_logs:/var/log/jobs
-    volumes_from:
-      - harbor-setupwrapper
+      - etc:/etc
+      - configdb:/configdb
+      - configui:/configui
+      - configjobservice:/configjobservice
     depends_on:
       - log
       - harbor-setupwrapper
@@ -141,8 +146,11 @@ services:
     image: nginx:1.11.5
     container_name: nginx
     restart: always
-    volumes_from:
-      - harbor-setupwrapper
+    volumes:
+      - etc:/etc
+      - configdb:/configdb
+      - configui:/configui
+      - configjobservice:/configjobservice
     depends_on:
       - log
       - harbor-setupwrapper
@@ -156,7 +164,7 @@ services:
         tag: "proxy"
     labels:
       io.rancher.container.hostname_override: container_name
-      #io.rancher.sidekicks: harbor-setupwrapper
+      io.rancher.sidekicks: harbor-setupwrapper
       traefik.alias: ${harborhostname}
       traefik.port: 80
       traefik.domain: ${traefikdomain}
