@@ -11,6 +11,7 @@ services:
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
+    volume_driver: rancher-nfs
     command: ["/harbor/harbor-setupwrapper.sh"]
     network_mode: "none"
     labels:
@@ -39,6 +40,7 @@ services:
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
+    volume_driver: rancher-nfs
     environment:
       - GODEBUG=netdns=cgo
     command:
@@ -64,6 +66,7 @@ services:
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
+    volume_driver: rancher-nfs
     depends_on:
       - log
       - harbor-setupwrapper
@@ -90,6 +93,7 @@ services:
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
+    volume_driver: rancher-nfs
     depends_on:
       - log
       - harbor-setupwrapper
@@ -119,6 +123,7 @@ services:
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
+    volume_driver: rancher-nfs
     depends_on:
       - log
       - harbor-setupwrapper
@@ -151,6 +156,7 @@ services:
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
+    volume_driver: rancher-nfs
     depends_on:
       - log
       - harbor-setupwrapper
