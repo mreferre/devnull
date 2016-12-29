@@ -61,13 +61,13 @@ services:
     restart: always
     volumes:
       - /data/registry:/storage
-      - etcui:/etc/ui
-      - etcjobservice:/etc/jobservice
+      #- etcui:/etc/ui
+      #- etcjobservice:/etc/jobservice
       - etcregistry:/etc/registry
-      - etcnginx:/etc/nginx
-      - configdb:/configdb
-      - configui:/configui
-      - configjobservice:/configjobservice
+      #- etcnginx:/etc/nginx
+      #- configdb:/configdb
+      #- configui:/configui
+      #- configjobservice:/configjobservice
     volume_driver: ${volumedriver}
     environment:
       - GODEBUG=netdns=cgo
@@ -89,13 +89,13 @@ services:
     restart: always
     volumes:
       - /data/database:/var/lib/mysql
-      - etcui:/etc/ui
-      - etcjobservice:/etc/jobservice
-      - etcregistry:/etc/registry
-      - etcnginx:/etc/nginx
+      #- etcui:/etc/ui
+      #- etcjobservice:/etc/jobservice
+      #- etcregistry:/etc/registry
+      #- etcnginx:/etc/nginx
       - configdb:/configdb
-      - configui:/configui
-      - configjobservice:/configjobservice
+      #- configui:/configui
+      #- configjobservice:/configjobservice
     volume_driver: ${volumedriver}
     depends_on:
       - log
@@ -119,12 +119,12 @@ services:
     volumes:
       - /data:/harbor_storage
       - etcui:/etc/ui
-      - etcjobservice:/etc/jobservice
-      - etcregistry:/etc/registry
-      - etcnginx:/etc/nginx
-      - configdb:/configdb
+      #- etcjobservice:/etc/jobservice
+      #- etcregistry:/etc/registry
+      #- etcnginx:/etc/nginx
+      #- configdb:/configdb
       - configui:/configui
-      - configjobservice:/configjobservice
+      #- configjobservice:/configjobservice
     volume_driver: ${volumedriver}
     depends_on:
       - log
@@ -150,13 +150,13 @@ services:
     restart: always
     volumes:
       - /data/job_logs:/var/log/jobs
-      - etcui:/etc/ui
+      #- etcui:/etc/ui
       - etcjobservice:/etc/jobservice
-      - etcregistry:/etc/registry
-      - etcnginx:/etc/nginx
-      - configdb:/configdb
-      - configui:/configui
-      - configjobservice:/configjobservice
+      #- etcregistry:/etc/registry
+      #- etcnginx:/etc/nginx
+      #- configdb:/configdb
+      #- configui:/configui
+      #- configjobservice:/configjobservice
     volume_driver: ${volumedriver}
     depends_on:
       - log
@@ -185,13 +185,13 @@ services:
     container_name: nginx
     restart: always
     volumes:
-      - etcui:/etc/ui
-      - etcjobservice:/etc/jobservice
-      - etcregistry:/etc/registry
+      #- etcui:/etc/ui
+      #- etcjobservice:/etc/jobservice
+      #- etcregistry:/etc/registry
       - etcnginx:/etc/nginx
-      - configdb:/configdb
-      - configui:/configui
-      - configjobservice:/configjobservice
+      #- configdb:/configdb
+      #- configui:/configui
+      #- configjobservice:/configjobservice
     volume_driver: ${volumedriver}
     depends_on:
       - log
