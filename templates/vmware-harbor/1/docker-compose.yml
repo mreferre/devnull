@@ -4,7 +4,7 @@ services:
     image: mreferre/harbor-setupwrapper:0.5.0
     container_name: harbor-setupwrapper
     environment:
-      - HARBORHOSTNAME=${harborhostname}${traefikdomain}
+      - HARBORHOSTNAME=${harborhostname}
       - HARBOR_ADMIN_PASSWORD=${harbor_admin_password}
     volumes:
       - /etc/registry
@@ -29,7 +29,6 @@ services:
     ports:
       - 1514:514
     labels:
-      io.rancher.scheduler.affinity:host_label: ${harborhostlabel}
       io.rancher.container.hostname_override: container_name
       io.rancher.scheduler.affinity:host_label: ${harborhostlabel}
   registry:
