@@ -188,7 +188,7 @@ services:
         tag: "proxy"
     labels:
       io.rancher.container.hostname_override: container_name
-      io.rancher.sidekicks: harbor-setupwrapper
+      #io.rancher.sidekicks: harbor-setupwrapper
       traefik.alias: ${harborhostname}
       traefik.port: 80
       traefik.domain: ${traefikdomain}
