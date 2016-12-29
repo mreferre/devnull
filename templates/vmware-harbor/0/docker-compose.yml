@@ -1,4 +1,26 @@
 version: '2'
+volumes:
+  etcjobservice:
+    external: true
+    driver: rancher-nfs
+  etcnginx:
+    external: true
+    driver: rancher-nfs
+  configjobservice:
+    external: true
+    driver: rancher-nfs
+  etcregistry:
+    external: true
+    driver: rancher-nfs
+  configdb:
+    external: true
+    driver: rancher-nfs
+  etcui:
+    external: true
+    driver: rancher-nfs
+  configui:
+    external: true
+    driver: rancher-nfs
 services:
   harbor-setupwrapper:
     image: mreferre/harbor-setupwrapper:0.5.0
