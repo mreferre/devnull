@@ -39,13 +39,7 @@ services:
     restart: always
     volumes:
       - /data/registry:/storage
-      - etcui:/etc/ui
-      - etcjobservice:/etc/jobservice
       - etcregistry:/etc/registry
-      - etcnginx:/etc/nginx
-      - configdb:/configdb
-      - configui:/configui
-      - configjobservice:/configjobservice
     volume_driver: rancher-nfs
     environment:
       - GODEBUG=netdns=cgo
@@ -68,13 +62,7 @@ services:
     restart: always
     volumes:
       - /data/database:/var/lib/mysql
-      - etcui:/etc/ui
-      - etcjobservice:/etc/jobservice
-      - etcregistry:/etc/registry
-      - etcnginx:/etc/nginx
       - configdb:/configdb
-      - configui:/configui
-      - configjobservice:/configjobservice
     volume_driver: rancher-nfs
     depends_on:
       - log
@@ -99,10 +87,6 @@ services:
     volumes:
       - /data:/harbor_storage
       - etcui:/etc/ui
-      - etcjobservice:/etc/jobservice
-      - etcregistry:/etc/registry
-      - etcnginx:/etc/nginx
-      - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
     volume_driver: rancher-nfs
@@ -131,12 +115,7 @@ services:
     restart: always
     volumes:
       - /data/job_logs:/var/log/jobs
-      - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
-      - etcregistry:/etc/registry
-      - etcnginx:/etc/nginx
-      - configdb:/configdb
-      - configui:/configui
       - configjobservice:/configjobservice
     volume_driver: rancher-nfs
     depends_on:
@@ -167,13 +146,7 @@ services:
     container_name: nginx
     restart: always
     volumes:
-      - etcui:/etc/ui
-      - etcjobservice:/etc/jobservice
-      - etcregistry:/etc/registry
       - etcnginx:/etc/nginx
-      - configdb:/configdb
-      - configui:/configui
-      - configjobservice:/configjobservice
     volume_driver: rancher-nfs
     depends_on:
       - log
