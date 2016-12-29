@@ -11,6 +11,7 @@ services:
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
+      - configregistry:/configregistry      
     volume_driver: rancher-nfs
     command: ["/harbor/harbor-setupwrapper.sh"]
     network_mode: "none"
