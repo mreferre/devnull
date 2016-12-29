@@ -1,25 +1,18 @@
 version: '2'
 volumes:
   etcjobservice:
-    #external: true #uncomment if you prefer to create the volumes manually
     driver: rancher-nfs
   etcnginx:
-    #external: true #uncomment if you prefer to create the volumes manually
     driver: rancher-nfs
   etcregistry:
-    #external: true #uncomment if you prefer to create the volumes manually
     driver: rancher-nfs
   etcui:
-    #external: true #uncomment if you prefer to create the volumes manually
     driver: rancher-nfs
   configjobservice:
-    #external: true #uncomment if you prefer to create the volumes manually
     driver: rancher-nfs
   configdb:
-    #external: true #uncomment if you prefer to create the volumes manually
     driver: rancher-nfs
   configui:
-    #external: true #uncomment if you prefer to create the volumes manually
     driver: rancher-nfs
 services:
   harbor-setupwrapper:
