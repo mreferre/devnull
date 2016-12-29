@@ -1,5 +1,5 @@
 version: '2'
-volumes:
+volumes: #if you prefere to pre-create and manage volumes outside of this stack add 'external: true' to each of the volumes
   etcjobservice:
     driver: rancher-nfs
   etcnginx:
