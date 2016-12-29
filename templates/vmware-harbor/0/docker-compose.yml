@@ -1,19 +1,26 @@
 version: '2'
-volumes: #if you prefere to pre-create and manage volumes outside of this stack add 'external: true' to each of the volumes
+volumes: 
   etcjobservice:
-    driver: rancher-nfs
+    external: true
+    driver: ${volumedriver}
   etcnginx:
-    driver: rancher-nfs
+    external: true
+    driver: ${volumedriver}
   etcregistry:
-    driver: rancher-nfs
+    external: true
+    driver: ${volumedriver}
   etcui:
-    driver: rancher-nfs
+    external: true
+    driver: ${volumedriver}
   configjobservice:
-    driver: rancher-nfs
+    external: true
+    driver: ${volumedriver}
   configdb:
-    driver: rancher-nfs
+    external: true
+    driver: ${volumedriver}
   configui:
-    driver: rancher-nfs
+    external: true
+    driver: ${volumedriver}
 services:
   harbor-setupwrapper:
     image: mreferre/harbor-setupwrapper:0.5.0
@@ -29,7 +36,7 @@ services:
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
-    volume_driver: rancher-nfs
+    volume_driver: ${volumedriver}
     command: ["/harbor/harbor-setupwrapper.sh"]
     network_mode: "none"
     labels:
@@ -61,7 +68,7 @@ services:
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
-    volume_driver: rancher-nfs
+    volume_driver: ${volumedriver}
     environment:
       - GODEBUG=netdns=cgo
     command:
@@ -76,7 +83,6 @@ services:
         tag: "registry"
     labels:
       io.rancher.container.hostname_override: container_name
-      #io.rancher.sidekicks: harbor-setupwrapper
   mysql:
     image: vmware/harbor-db:0.5.0
     container_name: harbor-db
@@ -90,7 +96,7 @@ services:
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
-    volume_driver: rancher-nfs
+    volume_driver: ${volumedriver}
     depends_on:
       - log
       - harbor-setupwrapper
@@ -106,7 +112,6 @@ services:
       - /configdb/entrypointdb.sh
     labels:
       io.rancher.container.hostname_override: container_name
-      #io.rancher.sidekicks: harbor-setupwrapper
   ui:
     image: vmware/harbor-ui:0.5.0
     container_name: harbor-ui
@@ -120,7 +125,7 @@ services:
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
-    volume_driver: rancher-nfs
+    volume_driver: ${volumedriver}
     depends_on:
       - log
       - harbor-setupwrapper
@@ -139,7 +144,6 @@ services:
       - mysql
     labels:
       io.rancher.container.hostname_override: container_name
-      #io.rancher.sidekicks: harbor-setupwrapper
   jobservice:
     image: vmware/harbor-jobservice:0.5.0
     container_name: harbor-jobservice
@@ -153,7 +157,7 @@ services:
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
-    volume_driver: rancher-nfs
+    volume_driver: ${volumedriver}
     depends_on:
       - log
       - harbor-setupwrapper
@@ -176,7 +180,6 @@ services:
       - mysql
     labels:
       io.rancher.container.hostname_override: container_name
-      #io.rancher.sidekicks: harbor-setupwrapper
   proxy:
     image: nginx:1.11.5
     container_name: nginx
@@ -189,7 +192,7 @@ services:
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
-    volume_driver: rancher-nfs
+    volume_driver: ${volumedriver}
     depends_on:
       - log
       - harbor-setupwrapper
@@ -203,7 +206,6 @@ services:
         tag: "proxy"
     labels:
       io.rancher.container.hostname_override: container_name
-      #io.rancher.sidekicks: harbor-setupwrapper
       traefik.alias: ${harborhostname}
       traefik.port: 80
       traefik.domain: ${traefikdomain}

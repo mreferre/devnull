@@ -26,6 +26,12 @@ version: '2'
       required: false
       default: 
       type: "string"
+    - variable: "volumedriver"
+      description: "Volume Driver being used (default: rancher-nfs)"
+      label: "Volume Driver:"
+      required: true
+      default: rancher-nfs
+      type: "string"
 services:
   registry:
     scale: 1
