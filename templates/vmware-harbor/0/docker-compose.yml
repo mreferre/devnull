@@ -11,7 +11,6 @@ services:
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
-      - configregistry:/configregistry      
     volume_driver: rancher-nfs
     command: ["/harbor/harbor-setupwrapper.sh"]
     network_mode: "none"
@@ -38,6 +37,9 @@ services:
     volumes:
       - /data/registry:/storage
       - etc:/etc
+      - configdb:/configdb
+      - configui:/configui
+      - configjobservice:/configjobservice
     volume_driver: rancher-nfs
     environment:
       - GODEBUG=netdns=cgo
@@ -62,6 +64,8 @@ services:
       - /data/database:/var/lib/mysql
       - etc:/etc
       - configdb:/configdb
+      - configui:/configui
+      - configjobservice:/configjobservice
     volume_driver: rancher-nfs
     depends_on:
       - log
@@ -86,7 +90,9 @@ services:
     volumes:
       - /data:/harbor_storage
       - etc:/etc
+      - configdb:/configdb
       - configui:/configui
+      - configjobservice:/configjobservice
     volume_driver: rancher-nfs
     depends_on:
       - log
@@ -114,6 +120,8 @@ services:
     volumes:
       - /data/job_logs:/var/log/jobs
       - etc:/etc
+      - configdb:/configdb
+      - configui:/configui
       - configjobservice:/configjobservice
     volume_driver: rancher-nfs
     depends_on:
@@ -145,6 +153,9 @@ services:
     restart: always
     volumes:
       - etc:/etc
+      - configdb:/configdb
+      - configui:/configui
+      - configjobservice:/configjobservice
     volume_driver: rancher-nfs
     depends_on:
       - log
@@ -159,7 +170,7 @@ services:
         tag: "proxy"
     labels:
       io.rancher.container.hostname_override: container_name
-      #io.rancher.sidekicks: harbor-setupwrapper
+      io.rancher.sidekicks: harbor-setupwrapper
       traefik.alias: ${harborhostname}
       traefik.port: 80
       traefik.domain: ${traefikdomain}
