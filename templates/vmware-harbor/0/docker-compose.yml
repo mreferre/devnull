@@ -37,9 +37,6 @@ services:
     volumes:
       - /data/registry:/storage
       - etc:/etc
-      - configdb:/configdb
-      - configui:/configui
-      - configjobservice:/configjobservice
     volume_driver: rancher-nfs
     environment:
       - GODEBUG=netdns=cgo
@@ -64,8 +61,6 @@ services:
       - /data/database:/var/lib/mysql
       - etc:/etc
       - configdb:/configdb
-      - configui:/configui
-      - configjobservice:/configjobservice
     volume_driver: rancher-nfs
     depends_on:
       - log
@@ -90,9 +85,7 @@ services:
     volumes:
       - /data:/harbor_storage
       - etc:/etc
-      - configdb:/configdb
       - configui:/configui
-      - configjobservice:/configjobservice
     volume_driver: rancher-nfs
     depends_on:
       - log
@@ -120,8 +113,6 @@ services:
     volumes:
       - /data/job_logs:/var/log/jobs
       - etc:/etc
-      - configdb:/configdb
-      - configui:/configui
       - configjobservice:/configjobservice
     volume_driver: rancher-nfs
     depends_on:
@@ -153,9 +144,6 @@ services:
     restart: always
     volumes:
       - etc:/etc
-      - configdb:/configdb
-      - configui:/configui
-      - configjobservice:/configjobservice
     volume_driver: rancher-nfs
     depends_on:
       - log
