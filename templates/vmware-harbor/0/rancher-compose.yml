@@ -23,8 +23,8 @@ version: '2'
     - variable: "traefikdomain"
       description: "Harbor domain name (if you are using Traefik you should call out the domain here and the harbor host name should just represent the hostname)"
       label: "(Traefik) domain:"
-      required: false
-      default: 
+      required: true
+      default: mycompany.com
       type: "string"
     - variable: "volumedriver"
       description: "Volume Driver being used (default: rancher-nfs)"
