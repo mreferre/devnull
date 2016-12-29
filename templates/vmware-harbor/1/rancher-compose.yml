@@ -30,13 +30,19 @@ version: '2'
 services:
   registry:
     scale: 1
+    start_on_create: false
   proxy:
     scale: 1
+    start_on_create: false
   jobservice:
     scale: 1
+    start_on_create: false
   ui:
     scale: 1
+    start_on_create: false
   mysql:
     scale: 1
+    start_on_create: false
   harbor-setupwrapper:
     scale: 1
+    start_on_create: true
