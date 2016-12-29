@@ -7,7 +7,10 @@ services:
       - HARBORHOSTNAME=${harborhostname}${traefikdomain}
       - HARBOR_ADMIN_PASSWORD=${harbor_admin_password}
     volumes:
-      - etc:/etc
+      - etcui:/etc/ui
+      - etcjobservice:/etc/jobservice
+      - etcregistry:/etc/registry
+      - etcnginx:/etc/nginx
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
@@ -36,7 +39,10 @@ services:
     restart: always
     volumes:
       - /data/registry:/storage
-      - etc:/etc
+      - etcui:/etc/ui
+      - etcjobservice:/etc/jobservice
+      - etcregistry:/etc/registry
+      - etcnginx:/etc/nginx
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
@@ -62,7 +68,10 @@ services:
     restart: always
     volumes:
       - /data/database:/var/lib/mysql
-      - etc:/etc
+      - etcui:/etc/ui
+      - etcjobservice:/etc/jobservice
+      - etcregistry:/etc/registry
+      - etcnginx:/etc/nginx
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
@@ -89,7 +98,10 @@ services:
     restart: always
     volumes:
       - /data:/harbor_storage
-      - etc:/etc
+      - etcui:/etc/ui
+      - etcjobservice:/etc/jobservice
+      - etcregistry:/etc/registry
+      - etcnginx:/etc/nginx
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
@@ -119,7 +131,10 @@ services:
     restart: always
     volumes:
       - /data/job_logs:/var/log/jobs
-      - etc:/etc
+      - etcui:/etc/ui
+      - etcjobservice:/etc/jobservice
+      - etcregistry:/etc/registry
+      - etcnginx:/etc/nginx
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
@@ -152,7 +167,10 @@ services:
     container_name: nginx
     restart: always
     volumes:
-      - etc:/etc
+      - etcui:/etc/ui
+      - etcjobservice:/etc/jobservice
+      - etcregistry:/etc/registry
+      - etcnginx:/etc/nginx
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
