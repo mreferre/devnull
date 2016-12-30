@@ -40,6 +40,8 @@ services:
       - /data/registry:/storage
     volumes_from:
       - harbor-setupwrapper
+    external_links:
+      - ui
     environment:
       - GODEBUG=netdns=cgo
     command:
