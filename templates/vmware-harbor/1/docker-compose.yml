@@ -36,7 +36,7 @@ services:
     image: library/registry:2.5.0
     container_name: registry
     restart: always
-    dns_search:
+    dns_search: #https://forums.rancher.com/t/cant-resolve-simple-container-names-within-sidekick-structure/3876
       - harbor-setupwrapper
     volumes:
       - /data/registry:/storage
@@ -62,7 +62,7 @@ services:
     image: vmware/harbor-db:0.5.0
     container_name: harbor-db
     restart: always
-    dns_search:
+    dns_search: #https://forums.rancher.com/t/cant-resolve-simple-container-names-within-sidekick-structure/3876
       - harbor-setupwrapper
     volumes:
       - /data/database:/var/lib/mysql
@@ -89,7 +89,7 @@ services:
     image: vmware/harbor-ui:0.5.0
     container_name: harbor-ui
     restart: always
-    dns_search:
+    dns_search: #https://forums.rancher.com/t/cant-resolve-simple-container-names-within-sidekick-structure/3876
       - harbor-setupwrapper
     volumes:
       - /data:/harbor_storage
@@ -119,7 +119,7 @@ services:
     image: vmware/harbor-jobservice:0.5.0
     container_name: harbor-jobservice
     restart: always
-    dns_search:
+    dns_search: #https://forums.rancher.com/t/cant-resolve-simple-container-names-within-sidekick-structure/3876
       - harbor-setupwrapper
     volumes:
       - /data/job_logs:/var/log/jobs
@@ -154,7 +154,7 @@ services:
     image: nginx:1.11.5
     container_name: nginx
     restart: always
-    dns_search:
+    dns_search: #https://forums.rancher.com/t/cant-resolve-simple-container-names-within-sidekick-structure/3876
       - harbor-setupwrapper
     volumes_from:
       - harbor-setupwrapper
