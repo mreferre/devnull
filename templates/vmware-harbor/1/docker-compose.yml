@@ -26,7 +26,7 @@ services:
     container_name: harbor-log
     restart: always
     volumes:
-      - /var/log/docker/
+      - /var/log/harbor/:/var/log/docker/
     ports:
       - 1514:514
     labels:
@@ -37,7 +37,7 @@ services:
     container_name: registry
     restart: always
     volumes:
-      - /storage
+      - /data/registry:/storage
     volumes_from:
       - harbor-setupwrapper
     environment:
@@ -61,7 +61,7 @@ services:
     container_name: harbor-db
     restart: always
     volumes:
-      - /var/lib/mysql
+      - /data/database:/var/lib/mysql
     volumes_from:
       - harbor-setupwrapper
     depends_on:
@@ -86,7 +86,7 @@ services:
     container_name: harbor-ui
     restart: always
     volumes:
-      - /harbor_storage
+      - /data:/harbor_storage
     volumes_from:
       - harbor-setupwrapper
     depends_on:
@@ -114,7 +114,7 @@ services:
     container_name: harbor-jobservice
     restart: always
     volumes:
-      - /var/log/jobs
+      - /data/job_logs:/var/log/jobs
     volumes_from:
       - harbor-setupwrapper
     depends_on:
