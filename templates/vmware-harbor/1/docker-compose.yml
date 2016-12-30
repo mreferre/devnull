@@ -36,12 +36,12 @@ services:
     image: library/registry:2.5.0
     container_name: registry
     restart: always
+    dns_search:
+      - harbor-setupwrapper
     volumes:
       - /data/registry:/storage
     volumes_from:
       - harbor-setupwrapper
-    external_links:
-      - ui
     environment:
       - GODEBUG=netdns=cgo
     command:
@@ -62,6 +62,8 @@ services:
     image: vmware/harbor-db:0.5.0
     container_name: harbor-db
     restart: always
+    dns_search:
+      - harbor-setupwrapper
     volumes:
       - /data/database:/var/lib/mysql
     volumes_from:
@@ -87,6 +89,8 @@ services:
     image: vmware/harbor-ui:0.5.0
     container_name: harbor-ui
     restart: always
+    dns_search:
+      - harbor-setupwrapper
     volumes:
       - /data:/harbor_storage
     volumes_from:
@@ -115,6 +119,8 @@ services:
     image: vmware/harbor-jobservice:0.5.0
     container_name: harbor-jobservice
     restart: always
+    dns_search:
+      - harbor-setupwrapper
     volumes:
       - /data/job_logs:/var/log/jobs
     volumes_from:
@@ -148,6 +154,8 @@ services:
     image: nginx:1.11.5
     container_name: nginx
     restart: always
+    dns_search:
+      - harbor-setupwrapper
     volumes_from:
       - harbor-setupwrapper
     ports:
