@@ -46,7 +46,7 @@ services:
       ["serve", "/etc/registry/config.yml"]
     depends_on:
       - log
-      - harbor-setupwrapper
+      #- harbor-setupwrapper
     logging:
       driver: "syslog"
       options:
@@ -66,7 +66,7 @@ services:
       - harbor-setupwrapper
     depends_on:
       - log
-      - harbor-setupwrapper
+      #- harbor-setupwrapper
     logging:
       driver: "syslog"
       options:
@@ -91,7 +91,7 @@ services:
       - harbor-setupwrapper
     depends_on:
       - log
-      - harbor-setupwrapper
+      #- harbor-setupwrapper
     logging:
       driver: "syslog"
       options:
@@ -119,11 +119,11 @@ services:
       - harbor-setupwrapper
     depends_on:
       - log
-      - harbor-setupwrapper
+      #- harbor-setupwrapper
     external_links:
       - registry
       - ui
-      - mysql 
+      - mysql
     logging:
       driver: "syslog"
       options:
@@ -153,7 +153,7 @@ services:
       - 443:443
     depends_on:
       - log
-      - harbor-setupwrapper
+      #- harbor-setupwrapper
     external_links:
       - registry
       - ui
