@@ -36,7 +36,6 @@ services:
       - configdb:/configdb
       - configui:/configui
       - configjobservice:/configjobservice
-    volume_driver: ${volumedriver}
     command: ["/harbor/harbor-setupwrapper.sh"]
     network_mode: "none"
     labels:
@@ -61,14 +60,13 @@ services:
     restart: always
     volumes:
       - /data/registry:/storage
-      #- etcui:/etc/ui
-      #- etcjobservice:/etc/jobservice
+      - etcui:/etc/ui
+      - etcjobservice:/etc/jobservice
       - etcregistry:/etc/registry
-      #- etcnginx:/etc/nginx
-      #- configdb:/configdb
-      #- configui:/configui
-      #- configjobservice:/configjobservice
-    volume_driver: ${volumedriver}
+      - etcnginx:/etc/nginx
+      - configdb:/configdb
+      - configui:/configui
+      - configjobservice:/configjobservice
     environment:
       - GODEBUG=netdns=cgo
     command:
@@ -89,14 +87,13 @@ services:
     restart: always
     volumes:
       - /data/database:/var/lib/mysql
-      #- etcui:/etc/ui
-      #- etcjobservice:/etc/jobservice
-      #- etcregistry:/etc/registry
-      #- etcnginx:/etc/nginx
+      - etcui:/etc/ui
+      - etcjobservice:/etc/jobservice
+      - etcregistry:/etc/registry
+      - etcnginx:/etc/nginx
       - configdb:/configdb
-      #- configui:/configui
-      #- configjobservice:/configjobservice
-    volume_driver: ${volumedriver}
+      - configui:/configui
+      - configjobservice:/configjobservice
     depends_on:
       - log
       - harbor-setupwrapper
@@ -119,13 +116,12 @@ services:
     volumes:
       - /data:/harbor_storage
       - etcui:/etc/ui
-      #- etcjobservice:/etc/jobservice
-      #- etcregistry:/etc/registry
-      #- etcnginx:/etc/nginx
-      #- configdb:/configdb
+      - etcjobservice:/etc/jobservice
+      - etcregistry:/etc/registry
+      - etcnginx:/etc/nginx
+      - configdb:/configdb
       - configui:/configui
-      #- configjobservice:/configjobservice
-    volume_driver: ${volumedriver}
+      - configjobservice:/configjobservice
     depends_on:
       - log
       - harbor-setupwrapper
@@ -139,9 +135,6 @@ services:
       - -c
     command:
       - /configui/entrypointui.sh
-    external_links:
-      - registry
-      - mysql
     labels:
       io.rancher.container.hostname_override: container_name
   jobservice:
@@ -150,20 +143,16 @@ services:
     restart: always
     volumes:
       - /data/job_logs:/var/log/jobs
-      #- etcui:/etc/ui
+      - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
-      #- etcregistry:/etc/registry
-      #- etcnginx:/etc/nginx
-      #- configdb:/configdb
-      #- configui:/configui
+      - etcregistry:/etc/registry
+      - etcnginx:/etc/nginx
+      - configdb:/configdb
+      - configui:/configui
       - configjobservice:/configjobservice
-    volume_driver: ${volumedriver}
     depends_on:
       - log
       - harbor-setupwrapper
-    external_links:
-      - registry:registry
-      - ui:ui
     logging:
       driver: "syslog"
       options:
@@ -174,10 +163,6 @@ services:
       - -c
     command:
       - /configjobservice/entrypointjobservice.sh
-    external_links:
-      - registry
-      - ui
-      - mysql
     labels:
       io.rancher.container.hostname_override: container_name
   proxy:
@@ -185,20 +170,16 @@ services:
     container_name: nginx
     restart: always
     volumes:
-      #- etcui:/etc/ui
-      #- etcjobservice:/etc/jobservice
-      #- etcregistry:/etc/registry
+      - etcui:/etc/ui
+      - etcjobservice:/etc/jobservice
+      - etcregistry:/etc/registry
       - etcnginx:/etc/nginx
-      #- configdb:/configdb
-      #- configui:/configui
-      #- configjobservice:/configjobservice
-    volume_driver: ${volumedriver}
+      - configdb:/configdb
+      - configui:/configui
+      - configjobservice:/configjobservice
     depends_on:
       - log
       - harbor-setupwrapper
-    external_links:
-      - registry
-      - ui
     logging:
       driver: "syslog"
       options:

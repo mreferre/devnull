@@ -39,7 +39,6 @@ services:
     dns_search: #https://forums.rancher.com/t/cant-resolve-simple-container-names-within-sidekick-structure/3876
       - harbor-setupwrapper
     volumes: #original directory mapping has been moved to named volumes
-      #- /data/registry:/storage
       - /data/registry:/storage
     volumes_from:
       - harbor-setupwrapper
@@ -49,7 +48,6 @@ services:
       ["serve", "/etc/registry/config.yml"]
     depends_on:
       - log
-      #- harbor-setupwrapper
     logging:
       driver: "syslog"
       options:
@@ -58,7 +56,6 @@ services:
     labels:
       io.rancher.container.hostname_override: container_name
       io.rancher.scheduler.affinity:host_label: ${harborhostlabel}
-      #io.rancher.sidekicks: harbor-setupwrapper
   mysql:
     image: vmware/harbor-db:0.5.0
     container_name: harbor-db
@@ -66,13 +63,11 @@ services:
     dns_search: #https://forums.rancher.com/t/cant-resolve-simple-container-names-within-sidekick-structure/3876
       - harbor-setupwrapper
     volumes: #original directory mapping has been moved to named volumes
-      #- /data/database:/var/lib/mysql
       - /data/database:/var/lib/mysql
     volumes_from:
       - harbor-setupwrapper
     depends_on:
       - log
-      #- harbor-setupwrapper
     logging:
       driver: "syslog"
       options:
@@ -86,7 +81,6 @@ services:
     labels:
       io.rancher.container.hostname_override: container_name
       io.rancher.scheduler.affinity:host_label: ${harborhostlabel}
-      #io.rancher.sidekicks: harbor-setupwrapper
   ui:
     image: vmware/harbor-ui:0.5.0
     container_name: harbor-ui
@@ -94,13 +88,11 @@ services:
     dns_search: #https://forums.rancher.com/t/cant-resolve-simple-container-names-within-sidekick-structure/3876
       - harbor-setupwrapper
     volumes: #original directory mapping has been moved to named volumes
-      #- /data:/harbor_storage
       - /data:/harbor_storage
     volumes_from:
       - harbor-setupwrapper
     depends_on:
       - log
-      #- harbor-setupwrapper
     logging:
       driver: "syslog"
       options:
@@ -117,7 +109,6 @@ services:
     labels:
       io.rancher.container.hostname_override: container_name
       io.rancher.scheduler.affinity:host_label: ${harborhostlabel}
-      #io.rancher.sidekicks: harbor-setupwrapper
   jobservice:
     image: vmware/harbor-jobservice:0.5.0
     container_name: harbor-jobservice
@@ -125,17 +116,15 @@ services:
     dns_search: #https://forums.rancher.com/t/cant-resolve-simple-container-names-within-sidekick-structure/3876
       - harbor-setupwrapper
     volumes: #original directory mapping has been moved to named volumes
-      #- /data/job_logs:/var/log/jobs
       - /data/job_logs:/var/log/jobs
     volumes_from:
       - harbor-setupwrapper
     depends_on:
       - log
-      #- harbor-setupwrapper
-    external_links:
-      - registry
-      - ui
-      - mysql
+    #external_links:
+    #  - registry
+    #  - ui
+    #  - mysql
     logging:
       driver: "syslog"
       options:
@@ -146,14 +135,13 @@ services:
       - -c
     command:
       - /configjobservice/entrypointjobservice.sh
-    external_links:
-      - registry
-      - ui
-      - mysql
+    #external_links:
+    #  - registry
+    #  - ui
+    #  - mysql
     labels:
       io.rancher.container.hostname_override: container_name
       io.rancher.scheduler.affinity:host_label: ${harborhostlabel}
-      #io.rancher.sidekicks: harbor-setupwrapper
   proxy:
     image: nginx:1.11.5
     container_name: nginx
@@ -167,10 +155,9 @@ services:
       - 443:443
     depends_on:
       - log
-      #- harbor-setupwrapper
-    external_links:
-      - registry
-      - ui
+    #external_links:
+    #  - registry
+    #  - ui
     logging:
       driver: "syslog"
       options:
@@ -179,4 +166,3 @@ services:
     labels:
       io.rancher.container.hostname_override: container_name
       io.rancher.scheduler.affinity:host_label: ${harborhostlabel}
-      #io.rancher.sidekicks: harbor-setupwrapper
