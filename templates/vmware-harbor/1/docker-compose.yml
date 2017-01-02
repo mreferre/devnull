@@ -95,7 +95,7 @@ services:
       - harbor-setupwrapper
     volumes: #original directory mapping has been moved to named volumes
       #- /data:/harbor_storage
-      - data:/harbor_storage
+      - /data:/harbor_storage
     volumes_from:
       - harbor-setupwrapper
     depends_on:
