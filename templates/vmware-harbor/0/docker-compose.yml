@@ -38,7 +38,7 @@ services:
     image: mreferre/harbor-setupwrapper:0.5.0
     container_name: harbor-setupwrapper
     environment:
-      - HARBORHOSTNAME=${harborhostname}${traefikdomain}
+      - HARBORHOSTNAME=${harborhostname}.${traefikdomain}
       - HARBOR_ADMIN_PASSWORD=${harbor_admin_password}
     volumes:
       - etcui:/etc/ui
