@@ -1,25 +1,37 @@
 version: '2'
 volumes:
   etcjobservice:
-    external: true
+    #external: true
     driver: ${volumedriver}
   etcnginx:
-    external: true
+    #external: true
     driver: ${volumedriver}
   etcregistry:
-    external: true
+    #external: true
     driver: ${volumedriver}
   etcui:
-    external: true
+    #external: true
     driver: ${volumedriver}
   configjobservice:
-    external: true
+    #external: true
     driver: ${volumedriver}
   configdb:
-    external: true
+    #external: true
     driver: ${volumedriver}
   configui:
-    external: true
+    #external: true
+    driver: ${volumedriver}
+  data:
+    #external: true
+    driver: ${volumedriver}
+  data-registry:
+    #external: true
+    driver: ${volumedriver}
+  data-database:
+    #external: true
+    driver: ${volumedriver}
+  data-job_logs:
+    #external: true
     driver: ${volumedriver}
 services:
   harbor-setupwrapper:
@@ -59,7 +71,7 @@ services:
     container_name: registry
     restart: always
     volumes:
-      - /data/registry:/storage
+      - data-registry:/storage
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
       - etcregistry:/etc/registry
@@ -86,7 +98,7 @@ services:
     container_name: harbor-db
     restart: always
     volumes:
-      - /data/database:/var/lib/mysql
+      - data-database:/var/lib/mysql
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
       - etcregistry:/etc/registry
@@ -114,7 +126,7 @@ services:
     container_name: harbor-ui
     restart: always
     volumes:
-      - /data:/harbor_storage
+      - data:/harbor_storage
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
       - etcregistry:/etc/registry
@@ -142,7 +154,7 @@ services:
     container_name: harbor-jobservice
     restart: always
     volumes:
-      - /data/job_logs:/var/log/jobs
+      - data-job_logs:/var/log/jobs
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
       - etcregistry:/etc/registry
