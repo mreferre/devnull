@@ -21,7 +21,7 @@ volumes:
   configui:
     #external: true
     driver: ${volumedriver}
-  data: #according to the eng team this is not even needed
+  data:
     #external: true
     driver: ${volumedriver}
   data-registry:
@@ -126,7 +126,7 @@ services:
     container_name: harbor-ui
     restart: always
     volumes:
-      - data:/harbor_storage #according to the eng team this is not even needed 
+      - data:/harbor_storage 
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
       - etcregistry:/etc/registry
