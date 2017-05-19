@@ -4,8 +4,8 @@ services:
     image: mreferre/harbor-setupwrapper:0.5.0
     container_name: harbor-setupwrapper
     environment:
-      - HARBORHOSTNAME=${harborhostname}
-      - HARBOR_ADMIN_PASSWORD=${harbor_admin_password}
+      - HARBORHOSTNAME=${HARBORHOSTNAME}
+      - HARBOR_ADMIN_PASSWORD=${HARBOR_ADMIN_PASSWORD}
     volumes:
       - /etc/registry
       - /etc/ui
@@ -16,29 +16,19 @@ services:
       - /configjobservice
     command: ["/harbor/harbor-setupwrapper.sh"]
     network_mode: "none"
-    labels:
-      io.rancher.scheduler.affinity:host_label: ${harborhostlabel}
-      io.rancher.container.hostname_override: container_name
-      io.rancher.container.start_once: 'true'
-      io.rancher.sidekicks: registry, ui, jobservice, mysql, proxy
   log:
     image: vmware/harbor-log:0.5.0
     container_name: harbor-log
     restart: always
     volumes:
-      - /var/log/harbor:/var/log/docker/
+      - /var/log/harbor/:/var/log/docker/
     ports:
       - 1514:514
-    labels:
-      io.rancher.container.hostname_override: container_name
-      io.rancher.scheduler.affinity:host_label: ${harborhostlabel}
   registry:
     image: library/registry:2.5.0
     container_name: registry
     restart: always
-    dns_search: #https://forums.rancher.com/t/cant-resolve-simple-container-names-within-sidekick-structure/3876
-      - harbor-setupwrapper
-    volumes: #original directory mapping has been moved to named volumes
+    volumes:
       - /data/registry:/storage
     volumes_from:
       - harbor-setupwrapper
@@ -53,16 +43,11 @@ services:
       options:
         syslog-address: "tcp://127.0.0.1:1514"
         tag: "registry"
-    labels:
-      io.rancher.container.hostname_override: container_name
-      io.rancher.scheduler.affinity:host_label: ${harborhostlabel}
   mysql:
     image: vmware/harbor-db:0.5.0
     container_name: harbor-db
     restart: always
-    dns_search: #https://forums.rancher.com/t/cant-resolve-simple-container-names-within-sidekick-structure/3876
-      - harbor-setupwrapper
-    volumes: #original directory mapping has been moved to named volumes
+    volumes:
       - /data/database:/var/lib/mysql
     volumes_from:
       - harbor-setupwrapper
@@ -78,16 +63,11 @@ services:
       - -c
     command:
       - /configdb/entrypointdb.sh
-    labels:
-      io.rancher.container.hostname_override: container_name
-      io.rancher.scheduler.affinity:host_label: ${harborhostlabel}
   ui:
     image: vmware/harbor-ui:0.5.0
     container_name: harbor-ui
     restart: always
-    dns_search: #https://forums.rancher.com/t/cant-resolve-simple-container-names-within-sidekick-structure/3876
-      - harbor-setupwrapper
-    volumes: #original directory mapping has been moved to named volumes
+    volumes:
       - /data:/harbor_storage
     volumes_from:
       - harbor-setupwrapper
@@ -106,25 +86,17 @@ services:
     external_links:
       - registry
       - mysql
-    labels:
-      io.rancher.container.hostname_override: container_name
-      io.rancher.scheduler.affinity:host_label: ${harborhostlabel}
   jobservice:
     image: vmware/harbor-jobservice:0.5.0
     container_name: harbor-jobservice
     restart: always
-    dns_search: #https://forums.rancher.com/t/cant-resolve-simple-container-names-within-sidekick-structure/3876
-      - harbor-setupwrapper
-    volumes: #original directory mapping has been moved to named volumes
+    volumes:
       - /data/job_logs:/var/log/jobs
     volumes_from:
       - harbor-setupwrapper
-    depends_on:
-      - log
-    #external_links:
-    #  - registry
-    #  - ui
-    #  - mysql
+    external_links:
+      - registry:registry
+      - ui:ui
     logging:
       driver: "syslog"
       options:
@@ -135,19 +107,14 @@ services:
       - -c
     command:
       - /configjobservice/entrypointjobservice.sh
-    #external_links:
-    #  - registry
-    #  - ui
-    #  - mysql
-    labels:
-      io.rancher.container.hostname_override: container_name
-      io.rancher.scheduler.affinity:host_label: ${harborhostlabel}
+    external_links:
+      - registry
+      - ui
+      - mysql
   proxy:
     image: nginx:1.11.5
     container_name: nginx
     restart: always
-    dns_search: #https://forums.rancher.com/t/cant-resolve-simple-container-names-within-sidekick-structure/3876
-      - harbor-setupwrapper
     volumes_from:
       - harbor-setupwrapper
     ports:
@@ -155,14 +122,11 @@ services:
       - 443:443
     depends_on:
       - log
-    #external_links:
-    #  - registry
-    #  - ui
+    external_links:
+      - registry
+      - ui
     logging:
       driver: "syslog"
       options:
         syslog-address: "tcp://127.0.0.1:1514"
         tag: "proxy"
-    labels:
-      io.rancher.container.hostname_override: container_name
-      io.rancher.scheduler.affinity:host_label: ${harborhostlabel}
