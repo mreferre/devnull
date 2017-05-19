@@ -19,4 +19,6 @@ ADD ./entrypointui.sh .
 
 ADD ./entrypointjobservice.sh .
 
+ADD ./entrypointadminserver.sh .
+
 RUN chmod +x harbor-setupwrapper.sh

@@ -99,7 +99,6 @@ services:
     volumes:
       - /data/secretkey:/etc/ui/key:z
       - /data/ca_download/:/etc/ui/ca/:z
-      - /data/secretkey:/etc/jobservice/key:z
     volumes_from:
       - harbor-setupwrapper
     depends_on:
