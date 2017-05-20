@@ -85,8 +85,8 @@ if [ ! -d "/configjobservice" ]; then
   mkdir /configjobservice
 fi
 
-if [ ! -d "/adminserver" ]; then
-  mkdir /adminserver
+if [ ! -d "/configadminserver" ]; then
+  mkdir /configadminserver
 fi
 
 cp -R ./common/config/registry /etc
@@ -98,18 +98,18 @@ cp -R ./common/config/nginx /etc
 cp ./common/config/db/env /configdb/env
 cp ./common/config/ui/env /configui/env
 cp ./common/config/jobservice/env /configjobservice/env
-cp ./common/config/adminserver/env /adminserver/env
+cp ./common/config/adminserver/env /configadminserver/env
 
 cp /harbor/entrypointdb.sh /configdb
 cp /harbor/entrypointui.sh /configui/entrypointui.sh
 cp /harbor/entrypointjobservice.sh /configjobservice/entrypointjobservice.sh 
-cp /harbor/entrypointadminserver.sh /adminserver/entrypointadminserver.sh 
+cp /harbor/entrypointadminserver.sh /configadminserver/entrypointadminserver.sh 
 
 
 chmod +x /configdb/entrypointdb.sh \
 		 /configui/entrypointui.sh \
 		 /configjobservice/entrypointjobservice.sh \
-     /adminserver/entrypointadminserver.sh 
+     /configadminserver/entrypointadminserver.sh 
 
 
 

@@ -1,12 +1,13 @@
 version: '2'
 services:
   harbor-setupwrapper:
-    image: mreferre/harbor-setupwrapper:1.1.1
+    image: mreferre/harbor-setupwrapper:1.1.1-1
     container_name: harbor-setupwrapper
     environment:
       - HARBORHOSTNAME=${HARBORHOSTNAME}
       - HARBOR_ADMIN_PASSWORD=${HARBOR_ADMIN_PASSWORD}
     volumes:
+      - /data:/data:z
       - /etc/registry
       - /etc/ui
       - /etc/jobservice
@@ -40,7 +41,7 @@ services:
     command:
       ["serve", "/etc/registry/config.yml"]
     depends_on:
-      - harbor-setupwrapper
+#      - harbor-setupwrapper
       - log
     logging:
       driver: "syslog"
@@ -58,7 +59,7 @@ services:
     volumes_from:
       - harbor-setupwrapper
     depends_on:
-      - harbor-setupwrapper
+#      - harbor-setupwrapper
       - log
     logging:
       driver: "syslog"
@@ -83,13 +84,18 @@ services:
     volumes_from:
       - harbor-setupwrapper
     depends_on:
-      - harbor-setupwrapper
+#      - harbor-setupwrapper
       - log
     logging:
       driver: "syslog"
       options:  
         syslog-address: "tcp://127.0.0.1:1514"
         tag: "adminserver"
+    entrypoint:
+      - /bin/sh
+      - -c
+    command:
+      - /configadminserver/entrypointadminserver.sh
     networks:
       - harbor
   ui:
@@ -102,7 +108,7 @@ services:
     volumes_from:
       - harbor-setupwrapper
     depends_on:
-      - harbor-setupwrapper
+#      - harbor-setupwrapper
       - log
       - adminserver
       - registry
@@ -116,9 +122,9 @@ services:
       - -c
     command:
       - /configui/entrypointui.sh
-    external_links:
-      - registry
-      - mysql
+#    external_links:
+#      - registry:registry
+#      - mysql:mysql
     networks:
       - harbor
   jobservice:
@@ -130,13 +136,14 @@ services:
       - /data/secretkey:/etc/jobservice/key:z
     volumes_from:
       - harbor-setupwrapper
-    depends_on:
-      - harbor-setupwrapper
+    depends_on: 
+#      - harbor-setupwrapper
       - ui
       - adminserver
-    external_links:
-      - registry:registry
-      - ui:ui
+#    external_links:
+#      - registry:registry
+#      - ui:ui
+#      - mysql:mysql
     logging:
       driver: "syslog"
       options:
@@ -147,10 +154,6 @@ services:
       - -c
     command:
       - /configjobservice/entrypointjobservice.sh
-    external_links:
-      - registry
-      - ui
-      - mysql
     networks:
       - harbor
   proxy:
@@ -164,14 +167,14 @@ services:
       - 443:443
       - 4443:4443
     depends_on:
-      - harbor-setupwrapper
+#      - harbor-setupwrapper
       - mysql
       - registry
       - ui
       - log
-    external_links:
-      - registry
-      - ui
+#    external_links:
+#      - registry:registry
+#      - ui:registry
     logging:
       driver: "syslog"
       options:
