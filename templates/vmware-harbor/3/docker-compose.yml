@@ -135,9 +135,9 @@ services:
     container_name: harbor-adminserver
     restart: always
     volumes:
-      - /data/config/:/etc/adminserver/config/:z
-      - /data/secretkey:/etc/adminserver/key:z
-      - /data/:/data/:z
+      - data/config/:/etc/adminserver/config/:z
+      - data/secretkey:/etc/adminserver/key:z
+      - data/:/data/:z
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
       - etcregistry:/etc/registry
@@ -167,8 +167,8 @@ services:
     restart: always
     volumes:
       #- data:/harbor_storage #according to the eng team this is not even needed (but leaving it in for consistency)
-      - /data/secretkey:/etc/ui/key:z
-      - /data/ca_download/:/etc/ui/ca/:z
+      - data/secretkey:/etc/ui/key:z
+      - data/ca_download/:/etc/ui/ca/:z
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
       - etcregistry:/etc/registry
@@ -200,7 +200,7 @@ services:
     restart: always
     volumes:
       - data-job_logs:/var/log/jobs
-      - /data/secretkey:/etc/jobservice/key:z
+      - data/secretkey:/etc/jobservice/key:z
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
       - etcregistry:/etc/registry
