@@ -145,7 +145,7 @@ volumes: #most volumes mappings require optimization (now all volumes map all co
     container_name: harbor-adminserver
     restart: always
     volumes:
-      - /data/secretkey:/etc/adminserver/key
+#      - /data/secretkey:/etc/adminserver/key
       - data-database:/var/lib/mysql
       - data:/data/:z
       - data-job_logs:/var/log/jobs
@@ -179,8 +179,8 @@ volumes: #most volumes mappings require optimization (now all volumes map all co
     container_name: harbor-ui
     restart: always
     volumes:
-      - /data/secretkey:/etc/ui/key:z
-      #- data:/harbor_storage #according to the eng team this is not even needed (but leaving it in for consistency)
+#      - /data/secretkey:/etc/ui/key:z
+#      - data:/harbor_storage #according to the eng team this is not even needed (but leaving it in for consistency)
       - data:/data/:z
       - data-database:/var/lib/mysql
       - data-job_logs:/var/log/jobs
@@ -216,7 +216,7 @@ volumes: #most volumes mappings require optimization (now all volumes map all co
     container_name: harbor-jobservice
     restart: always
     volumes:
-      - /data/secretkey:/etc/jobservice/key:z
+#      - /data/secretkey:/etc/jobservice/key:z
       - data:/data/:z
       - data-job_logs:/var/log/jobs
       - data-ca_download/:/etc/ui/ca/
