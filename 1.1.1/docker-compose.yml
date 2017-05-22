@@ -41,7 +41,6 @@ services:
     command:
       ["serve", "/etc/registry/config.yml"]
     depends_on:
-#      - harbor-setupwrapper
       - log
     logging:
       driver: "syslog"
@@ -58,19 +57,18 @@ services:
       - /data/database:/var/lib/mysql:z
     volumes_from:
       - harbor-setupwrapper
+    entrypoint:
+      - /bin/sh
+      - -c
+    command:
+      - /configdb/entrypointdb.sh
     depends_on:
-#      - harbor-setupwrapper
       - log
     logging:
       driver: "syslog"
       options:
         syslog-address: "tcp://127.0.0.1:1514"
         tag: "mysql"
-    entrypoint:
-      - /bin/sh
-      - -c
-    command:
-      - /configdb/entrypointdb.sh
     networks:
       - harbor
   adminserver:
@@ -83,19 +81,18 @@ services:
       - /data/:/data/:z
     volumes_from:
       - harbor-setupwrapper
+    entrypoint:
+      - /bin/sh
+      - -c
+    command:
+      - /configadminserver/entrypointadminserver.sh
     depends_on:
-#      - harbor-setupwrapper
       - log
     logging:
       driver: "syslog"
       options:  
         syslog-address: "tcp://127.0.0.1:1514"
         tag: "adminserver"
-    entrypoint:
-      - /bin/sh
-      - -c
-    command:
-      - /configadminserver/entrypointadminserver.sh
     networks:
       - harbor
   ui:
@@ -107,8 +104,12 @@ services:
       - /data/ca_download/:/etc/ui/ca/:z
     volumes_from:
       - harbor-setupwrapper
+    entrypoint:
+      - /bin/sh
+      - -c
+    command:
+      - /configui/entrypointui.sh
     depends_on:
-#      - harbor-setupwrapper
       - log
       - adminserver
       - registry
@@ -117,14 +118,6 @@ services:
       options:
         syslog-address: "tcp://127.0.0.1:1514"
         tag: "ui"
-    entrypoint:
-      - /bin/sh
-      - -c
-    command:
-      - /configui/entrypointui.sh
-#    external_links:
-#      - registry:registry
-#      - mysql:mysql
     networks:
       - harbor
   jobservice:
@@ -136,24 +129,20 @@ services:
       - /data/secretkey:/etc/jobservice/key:z
     volumes_from:
       - harbor-setupwrapper
-    depends_on: 
-#      - harbor-setupwrapper
-      - ui
-      - adminserver
-#    external_links:
-#      - registry:registry
-#      - ui:ui
-#      - mysql:mysql
-    logging:
-      driver: "syslog"
-      options:
-        syslog-address: "tcp://127.0.0.1:1514"
-        tag: "jobservice"
     entrypoint:
       - /bin/sh
       - -c
     command:
       - /configjobservice/entrypointjobservice.sh
+    depends_on: 
+      - log
+      - ui
+      - adminserver
+    logging:
+      driver: "syslog"
+      options:
+        syslog-address: "tcp://127.0.0.1:1514"
+        tag: "jobservice"
     networks:
       - harbor
   proxy:
@@ -167,14 +156,10 @@ services:
       - 443:443
       - 4443:4443
     depends_on:
-#      - harbor-setupwrapper
       - mysql
       - registry
       - ui
       - log
-#    external_links:
-#      - registry:registry
-#      - ui:registry
     logging:
       driver: "syslog"
       options:
