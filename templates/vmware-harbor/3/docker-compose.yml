@@ -1,8 +1,5 @@
 version: '2'
 volumes: #most volumes mappings require optimization (now all volumes map all containers) 
-  data:
-    #external: true
-    driver: ${volumedriver}
   etcjobservice:
     #external: true
     driver: ${volumedriver}
