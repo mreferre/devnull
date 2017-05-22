@@ -161,7 +161,7 @@ services:
       - /bin/sh
       - -c
     command:
-      - /configdb/entrypointdb.sh
+      - /configadminserver/entrypointadminserver.sh
     labels:
       io.rancher.container.hostname_override: container_name
   ui:
