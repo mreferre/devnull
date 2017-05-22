@@ -41,7 +41,8 @@ volumes: #most volumes mappings require optimization (now all volumes map all co
     driver: ${volumedriver}
   data-config:
     #external: true
-    driver: ${volumedriver}services:
+    driver: ${volumedriver}
+services:
   harbor-setupwrapper:
     image: mreferre/harbor-setupwrapper:1.1.1-1
     container_name: harbor-setupwrapper
