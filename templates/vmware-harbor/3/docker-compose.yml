@@ -12,9 +12,6 @@ volumes: #most volumes mappings require optimization (now all volumes map all co
   etcui:
     #external: true
     driver: ${volumedriver}
-  configadminserver:
-    #external: true
-    driver: ${volumedriver}
   configjobservice:
     #external: true
     driver: ${volumedriver}
@@ -22,6 +19,9 @@ volumes: #most volumes mappings require optimization (now all volumes map all co
     #external: true
     driver: ${volumedriver}
   configui:
+    #external: true
+    driver: ${volumedriver}
+  configadminserver:
     #external: true
     driver: ${volumedriver}
   data: #according to the eng team this is not even needed (but leaving it in for consistency)
@@ -36,7 +36,12 @@ volumes: #most volumes mappings require optimization (now all volumes map all co
   data-job_logs:
     #external: true
     driver: ${volumedriver}
-services:
+  data-ca_download:
+    #external: true
+    driver: ${volumedriver}
+  data-config:
+    #external: true
+    driver: ${volumedriver}services:
   harbor-setupwrapper:
     image: mreferre/harbor-setupwrapper:1.1.1-1
     container_name: harbor-setupwrapper
@@ -78,6 +83,8 @@ services:
     volumes:
       - data-registry:/storage
       - data:/data
+      - data-ca_download/:/etc/ui/ca/
+      - data-config:/etc/adminserver/config/
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
       - etcregistry:/etc/registry
@@ -106,7 +113,10 @@ services:
     restart: always
     volumes:
       - data-database:/var/lib/mysql
-      - data:/data
+      - data:/data:z
+      - data-job_logs:/var/log/jobs
+      - data-ca_download/:/etc/ui/ca/
+      - data-config:/etc/adminserver/config/
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
       - etcregistry:/etc/registry
@@ -135,9 +145,12 @@ services:
     container_name: harbor-adminserver
     restart: always
     volumes:
+      - /data/secretkey:/etc/adminserver/key
+      - data-database:/var/lib/mysql
       - data:/data/:z
-      - /data/config/:/etc/adminserver/config/:z
-      - /data/secretkey:/etc/adminserver/key:z
+      - data-job_logs:/var/log/jobs
+      - data-ca_download/:/etc/ui/ca/
+      - data-config:/etc/adminserver/config/
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
       - etcregistry:/etc/registry
@@ -166,10 +179,13 @@ services:
     container_name: harbor-ui
     restart: always
     volumes:
+      - /data/secretkey:/etc/ui/key:z
       #- data:/harbor_storage #according to the eng team this is not even needed (but leaving it in for consistency)
       - data:/data/:z
-      - /data/secretkey:/etc/ui/key:z
-      - /data/ca_download/:/etc/ui/ca/:z
+      - data-database:/var/lib/mysql
+      - data-job_logs:/var/log/jobs
+      - data-ca_download/:/etc/ui/ca/
+      - data-config:/etc/adminserver/config/
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
       - etcregistry:/etc/registry
@@ -200,9 +216,11 @@ services:
     container_name: harbor-jobservice
     restart: always
     volumes:
+      - /data/secretkey:/etc/jobservice/key:z
       - data:/data/:z
       - data-job_logs:/var/log/jobs
-      - /data/secretkey:/etc/jobservice/key:z
+      - data-ca_download/:/etc/ui/ca/
+      - data-config:/etc/adminserver/config/
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
       - etcregistry:/etc/registry
@@ -233,6 +251,11 @@ services:
     container_name: nginx
     restart: always
     volumes:
+      - data-database:/var/lib/mysql
+      - data:/data/:z
+      - data-job_logs:/var/log/jobs
+      - data-ca_download/:/etc/ui/ca/
+      - data-config:/etc/adminserver/config/
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
       - etcregistry:/etc/registry

@@ -91,8 +91,8 @@ services:
       - harbor-setupwrapper
     volumes: #original directory mapping has been moved to named volumes
       - /data/config/:/etc/adminserver/config/:z
-      - /data/secretkey:/etc/adminserver/key:z
-      - /data/:/data/:z
+#      - /data/secretkey:/etc/adminserver/key:z
+#      - /data/:/data/:z
     volumes_from:
       - harbor-setupwrapper
     depends_on:
@@ -117,7 +117,7 @@ services:
     dns_search: #https://forums.rancher.com/t/cant-resolve-simple-container-names-within-sidekick-structure/3876
       - harbor-setupwrapper
     volumes: #original directory mapping has been moved to named volumes
-      - /data/secretkey:/etc/ui/key:z
+#      - /data/secretkey:/etc/ui/key:z
       - /data/ca_download/:/etc/ui/ca/:z
     volumes_from:
       - harbor-setupwrapper
@@ -149,7 +149,7 @@ services:
       - harbor-setupwrapper
     volumes: #original directory mapping has been moved to named volumes
       - /data/job_logs:/var/log/jobs:z
-      - /data/secretkey:/etc/jobservice/key:z
+#      - /data/secretkey:/etc/jobservice/key:z
     volumes_from:
       - harbor-setupwrapper
     depends_on:
