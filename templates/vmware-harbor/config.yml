@@ -1,0 +1,5 @@
+name: Project Harbor
+description: |
+  (Experimental) Enterprise Class Container Registry [by VMware]
+version: v1.1.1
+category: Private Container Registry
