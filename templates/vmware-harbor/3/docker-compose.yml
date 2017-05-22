@@ -84,7 +84,7 @@ services:
     volumes:
       - data-registry:/storage
       - data:/data
-      - data-ca_download/:/etc/ui/ca/
+      - data-ca_download:/etc/ui/ca/
       - data-config:/etc/adminserver/config/
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
@@ -116,7 +116,7 @@ services:
       - data-database:/var/lib/mysql
       - data:/data:z
       - data-job_logs:/var/log/jobs
-      - data-ca_download/:/etc/ui/ca/
+      - data-ca_download:/etc/ui/ca/
       - data-config:/etc/adminserver/config/
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
@@ -150,7 +150,7 @@ services:
       - data-database:/var/lib/mysql
       - data:/data/:z
       - data-job_logs:/var/log/jobs
-      - data-ca_download/:/etc/ui/ca/
+      - data-ca_download:/etc/ui/ca/
       - data-config:/etc/adminserver/config/
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
@@ -185,7 +185,7 @@ services:
       - data:/data/:z
       - data-database:/var/lib/mysql
       - data-job_logs:/var/log/jobs
-      - data-ca_download/:/etc/ui/ca/
+      - data-ca_download:/etc/ui/ca/
       - data-config:/etc/adminserver/config/
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
@@ -220,7 +220,7 @@ services:
 #      - /data/secretkey:/etc/jobservice/key:z
       - data:/data/:z
       - data-job_logs:/var/log/jobs
-      - data-ca_download/:/etc/ui/ca/
+      - data-ca_download:/etc/ui/ca/
       - data-config:/etc/adminserver/config/
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
@@ -255,7 +255,7 @@ services:
       - data-database:/var/lib/mysql
       - data:/data/:z
       - data-job_logs:/var/log/jobs
-      - data-ca_download/:/etc/ui/ca/
+      - data-ca_download:/etc/ui/ca/
       - data-config:/etc/adminserver/config/
       - etcui:/etc/ui
       - etcjobservice:/etc/jobservice
