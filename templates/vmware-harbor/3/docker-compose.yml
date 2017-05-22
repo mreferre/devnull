@@ -41,7 +41,7 @@ volumes: #most volumes mappings require optimization (now all volumes map all co
     driver: ${volumedriver}
 services:
   harbor-setupwrapper:
-    image: mreferre/harbor-setupwrapper:0.5.0
+    image: mreferre/harbor-setupwrapper:1.1.1-1
     container_name: harbor-setupwrapper
     environment:
       - HARBORHOSTNAME=${harborhostname}.${traefikdomain}
@@ -104,7 +104,7 @@ services:
     labels:
       io.rancher.container.hostname_override: container_name
   mysql:
-    image: vmware/harbor-db:0.5.0
+    image: vmware/harbor-db:v1.1.1
     container_name: harbor-db
     restart: always
     volumes:
@@ -133,8 +133,6 @@ services:
       - /configdb/entrypointdb.sh
     labels:
       io.rancher.container.hostname_override: container_name
-
-
   adminserver:
     image: vmware/harbor-adminserver:v1.1.1
     container_name: harbor-adminserver
@@ -167,7 +165,7 @@ services:
     labels:
       io.rancher.container.hostname_override: container_name
   ui:
-    image: vmware/harbor-ui:0.5.0
+    image: vmware/harbor-ui:v1.1.1
     container_name: harbor-ui
     restart: always
     volumes:
