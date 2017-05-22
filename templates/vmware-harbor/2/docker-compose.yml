@@ -85,7 +85,7 @@ services:
       io.rancher.scheduler.affinity:host_label: ${harborhostlabel}
   adminserver:
     image: vmware/harbor-adminserver:v1.1.1
-    container_name: adminserver 
+    container_name: harbor-adminserver 
     restart: always
     dns_search: #https://forums.rancher.com/t/cant-resolve-simple-container-names-within-sidekick-structure/3876
       - harbor-setupwrapper
