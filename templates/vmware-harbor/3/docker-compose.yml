@@ -276,11 +276,11 @@ services:
       - ui
       - mysql
       - jobservice
-#    logging:
-#      driver: "syslog"
-#      options:
-#        syslog-address: "tcp://127.0.0.1:1514"
-#        tag: "proxy"
+    logging:
+      driver: "syslog"
+      options:
+        syslog-address: "tcp://127.0.0.1:1514"
+        tag: "proxy"
     labels:
       io.rancher.container.hostname_override: container_name
       traefik.alias: ${harborhostname}
