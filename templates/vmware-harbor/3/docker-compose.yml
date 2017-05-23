@@ -276,6 +276,7 @@ services:
       - ui
       - mysql
       - jobservice
+      - adminserver
     logging:
       driver: "syslog"
       options:

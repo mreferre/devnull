@@ -12,5 +12,6 @@ Note that:
 - the `IP/Hostname/FQDN` can be arbitrary set but the `(Traefik) domain` parameter needs to be a domain name that resolves to the host where `Traefik` is running
 - this catalog entry only supports `http` (`https` access is not supported)
 - because only `http` is supported, the Docker Host pulling/pushing from/to Harbor needs to have the `--insecure-registry` flag properly configured
+- While the Rancher UI may show that stack upgrades are available, upgrades are not supported at this point  
 
 ![](distributed.png)
