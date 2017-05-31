@@ -24,7 +24,7 @@ version: '2'
       label: "Harbor will be deployed on the host(s) with this label (default: harbor-host=true)"
       description: |
         The various Harbor containers will be deployed on host(s) with this label
-        Set the label on one host if you want Harbor to be deployed on a single host (rancher-nfs volume driver is required for multiple hosts)"
+        Set the label on one host if you want Harbor to be deployed on a single host (rancher-nfs volume driver is required for multiple hosts)
       default: harbor-host=true
       required: true
       type: "string"    
