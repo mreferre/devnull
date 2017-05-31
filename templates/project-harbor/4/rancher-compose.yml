@@ -1,11 +1,11 @@
 version: '2'
 .catalog:
   name: Harbor
-  version: 1.1.1-singlehost-rev0
+  version: 1.1.1-1-rev1
   description: |
     Enterprise Class Container Registry [by VMware]
   minimum_rancher_version: v0.59.0
-  uuid: harbor-2
+  uuid: harbor-4
   questions:
     - variable: "harborhostname"
       description: "Harbor IP, HOSTNAME or FQDN as used to acces it from the Docker CLI"
@@ -21,31 +21,43 @@ version: '2'
       required: true
       type: "string"
     - variable: "harborhostlabel"
-      label: "Harbor will be deployed on the host with this label (default: harbor-host=true)"
+      label: "Harbor will be deployed on the hosts with this label (default: harbor-host=true)"
       description: |
-        Harbor host label
+        Harbor will be deployed on hosts with this label. 
+        Set the label on one host if you want Harbor to be deployed on a single host (rancher-nfs volume driver is required for multiple hosts)"
       default: harbor-host=true
       required: true
-      type: "string"
+      type: "string"    
+    - variable: "volumedriver"
+      description: "Volume Driver being used. Set rancher-nfs if you run in distributed mode"
+      label: "Volume Driver:"
+      required: true
+      default: local
+      type: "enum"
+      options:
+        - local
+        - rancher-nfs
 services:
   registry:
     scale: 1
-    start_on_create: false
   adminserver:
     scale: 1
-    start_on_create: false
   proxy:
     scale: 1
-    start_on_create: false
+    health_check:
+      healthy_threshold: 2
+      response_timeout: 2000
+      port: 80
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      strategy: recreate
+      request_line:
   jobservice:
     scale: 1
-    start_on_create: false
   ui:
     scale: 1
-    start_on_create: false
   mysql:
     scale: 1
-    start_on_create: false
   harbor-setupwrapper:
     scale: 1
-    start_on_create: true
