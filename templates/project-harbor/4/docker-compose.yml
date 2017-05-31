@@ -294,5 +294,6 @@ services:
     ports:
       - 80
     labels:
+      io.rancher.scheduler.global: 'true'
       io.rancher.scheduler.affinity:host_label: ${harborlbhostlabel}
       io.rancher.container.hostname_override: container_name
