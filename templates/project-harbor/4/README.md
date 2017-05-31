@@ -1,4 +1,4 @@
-##Harbor 1.1.1 deployment (revision 1)
+## Harbor 1.1.1 deployment (revision 1)
 
 This catalog item version deploys `Harbor` 1.1.1 on a Cattle cluster and it leverages [Harbor setup wrapper](https://hub.docker.com/r/mreferre/harbor-setupwrapper/tags/) version 1.1.1-1. 
 
@@ -17,6 +17,8 @@ You govern the deployment model being used by setting the `harbor-host` label:
 If you opt in for the basic model there is no storage prerequisite and you can use the `local` volume driver. All volumes will be created locally and transparently on the host with the `harbor-host` label. 
 
 If you opt in for the advanced model you have to configure a volume driver that supports sharing among containers (this catalog entry has been tested with `rancher-nfs` which needs to be activated separately and prior to launch the advanced deployment model).
+
+You can use a volume driver that supports sharing among containers when deploying with the basic model but it is not required. 
 
 ### Network pre-requisites ###
 

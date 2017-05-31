@@ -289,3 +289,10 @@ services:
     labels:
       io.rancher.scheduler.affinity:host_label: ${harborhostlabel}
       io.rancher.container.hostname_override: container_name
+  harbor-lb:
+    image: rancher/lb-service-haproxy:<version>
+    ports:
+      - 80
+    labels:
+      io.rancher.scheduler.affinity:host_label: ${harborlbhostlabel}
+      io.rancher.container.hostname_override: container_name
