@@ -12,6 +12,8 @@ test
 
 blah nel branch
 
+un altro
+
 require 'redis'
 require 'socket'
 require 'sinatra'
