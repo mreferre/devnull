@@ -14,6 +14,8 @@ blah nel branch
 
 un altro
 
+modifica in branch2 locale 
+
 require 'redis'
 require 'socket'
 require 'sinatra'
