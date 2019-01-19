@@ -1,4 +1,4 @@
-require_relative '../modules/restaurant'
+require_relative 'modules/restaurant'
 
 def restaurant_adapter(event:, context:)
     $yelbdbhost = ENV['yelbdbhost']

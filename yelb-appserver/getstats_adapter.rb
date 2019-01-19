@@ -1,4 +1,4 @@
-require_relative '../modules/getstats'
+require_relative 'modules/getstats'
 
 def getstats_adapter(event:, context:)
     $redishost = ENV['redishost']

@@ -1,4 +1,4 @@
-require_relative '../modules/pageviews'
+require_relative 'modules/pageviews'
 
 def pageviews_adapter(event:, context:)
     $redishost = ENV['redishost']

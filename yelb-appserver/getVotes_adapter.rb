@@ -1,4 +1,4 @@
-require_relative '../modules/getVotes'
+require_relative 'modules/getVotes'
 
 def getVotes_adapter(event:, context:)
     $yelbdbhost = ENV['yelbdbhost']
