@@ -1,3 +1,6 @@
+require 'pg'
+require 'pg_ext'
+
 def restaurantsdbread(restaurant)
     con = PG.connect  :host => $yelbdbhost,
                       :port => $yelbdbport,

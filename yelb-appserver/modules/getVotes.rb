@@ -1,7 +1,3 @@
-require 'json'
-require 'socket'
-require 'pg'
-require 'pg_ext'
 require_relative 'restaurantsdbread'
 require_relative 'restaurantsdbupdate'
 

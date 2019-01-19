@@ -5,12 +5,14 @@
 ###########################################################
 ###########              USER INPUTS            ###########
 ###########################################################
-# variables UI component
+# UI component variables
 # The YELB_APPSERVER_ENDPOINT variable is used to configure the IP/FQDN that NGINX will be proxying to.
-# it essentially points back to the same host (NGINX) that serves the html5/angular binaries and that also acts as a proxy to the yelb-appserver
-# the true meaning of the YELB_APPSERVER_ENDPOINT variable is when you want to decouple the shipping of the html5/angular binaries (e.g off of S3)
-# from the yelb-appserver end-point (e.g. API Gatway) in a serverless deployment 
-export YELB_APPSERVER_ENDPOINT="${YELB_APPSERVER_ENDPOINT:-<localhost}"
+# The Angular UI is still being configured to point back to the site where the JS code has been downloaded to. 
+# These calls will hit the /api path and they will be be forwarded by NGINX to the YELB_APPSERVER_ENDPOINT endpoint.
+# The YELB_APPSERVER_ENDPOINT variable is also useful when you want to decouple the shipping of the html5/angular binaries (e.g off of S3)
+# from the yelb-appserver end-point (e.g. API Gatway) in a serverless deployment. In such scenario the Angular code needs to be compiled with
+# the custom option so that the Javascript will call the actual application endpoint (not the NGINX that will forward to it).
+export YELB_APPSERVER_ENDPOINT="${YELB_APPSERVER_ENDPOINT:-localhost}"
 ###########################################################
 ###########           END OF USER INPUTS        ###########
 ###########################################################
@@ -40,13 +42,12 @@ fi
 
 cd $HOMEDIR
 cd yelb/yelb-ui
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 . ~/.nvm/nvm.sh
-nvm install 6.11.5
-nvm install --lts
+nvm install 8.11
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -128,5 +129,3 @@ echo "    include /etc/nginx/conf.d/*.conf;" | sudo tee -a $NGINX_MAIN > /dev/nu
 echo "}" | sudo tee -a $NGINX_MAIN > /dev/null
 chkconfig nginx on
 service nginx start
-
-
