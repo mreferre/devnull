@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
-  "Transform": "AWS::Serverless-2016-10-31",
+  "Transform" : "AWS::Serverless-2016-10-31",
 
   "Description" : "Yelb on Lambda: Create a Yelb stack using Lambda for the application layer. This sample template only works in selected regions. This has been tested on the default VPC with Public Subnets.",
   "Globals": {
@@ -80,7 +80,6 @@
       "Properties" : {
         "GroupDescription" : "Enable Redis access from inside the VPC and SSH access from the Internet",
         "SecurityGroupIngress" : [
-          {"IpProtocol" : "tcp", "FromPort" : "6379", "ToPort" : "6379", "SourceSecurityGroupName" : { "Ref" : "YelbSecurityGroupYelbAppserver" }},
           {"IpProtocol" : "tcp", "FromPort" : "22", "ToPort" : "22", "CidrIp" : "0.0.0.0/0"}
         ]
       }
@@ -91,44 +90,33 @@
       "Properties" : {
         "GroupDescription" : "Enable Postgres access from inside the VPC and SSH access from the Internet",
         "SecurityGroupIngress" : [
-          {"IpProtocol" : "tcp", "FromPort" : "5432", "ToPort" : "5432", "SourceSecurityGroupName" : { "Ref" : "YelbSecurityGroupYelbAppserver" }},
           {"IpProtocol" : "tcp", "FromPort" : "22", "ToPort" : "22", "CidrIp" : "0.0.0.0/0"}
         ]
       }
-    }
+    },
 
-  },
-
-"Yelb-pageviews": {
+"getVotestest": {
   "Type": "AWS::Serverless::Function",
   "Properties": {
-      "CodeUri": "lambda/",
-      "Handler": "pageviews_adapter.pageview_handler",
+      "CodeUri": "s3://cervedcosenza/yelb-appserver-lambda.zip",
+      "Handler": "getVotes_adapter.getVotes_adapter",
       "Runtime": "ruby2.5",
       "Environment": {
           "Variables": {
-              "PARAM1": "VALUE"
+              "yelbdbhost": "ec2-54-93-35-90.eu-central-1.compute.amazonaws.com"
           }
       },
       "Events": {
-          "Yelb": {
-              "Type": "Api",
-              "Properties": {
-                  "Path": "/pageviews",
-                  "Method": "get"
-              }
-          }
-      }
-  }
-},
-
-
-
-
-  "Outputs" : {
-    "YelbURL" : {
-      "Description" : "URL for newly created single server Yelb instance",
-      "Value" : { "Fn::Join" : ["", ["http://", { "Fn::GetAtt" : [ "YelbUi", "PublicDnsName" ]}]] }
+        "Yelbtest": {
+            "Type": "Api",
+            "Properties": {
+                "Path": "/getVotestest",
+                "Method": "get"
+            }
+        }
     }
+
   }
+}
+}
 }
