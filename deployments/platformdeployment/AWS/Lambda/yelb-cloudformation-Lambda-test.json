@@ -1,0 +1,62 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Transform": "AWS::Serverless-2016-10-31",
+  "Description": "Yelb on Lambda: Create a Yelb stack using Lambda for the application layer. This sample template only works in selected regions. This has been tested on the default VPC with Public Subnets.",
+  "Globals": {
+    "Function": {
+      "Timeout": 3
+    }
+  },
+  "Resources": {
+    "getVotestest": {
+      "Type": "AWS::Serverless::Api",
+      "Properties": {
+        "StageName": "api",
+        "DefinitionBody": {
+          "swagger": 2,
+          "info": {
+            "title": {
+              "Ref": "AWS::StackName"
+            }
+          },
+          "paths": {
+            "/getVotestest": {
+              "get": {
+                "x-amazon-apigateway-integration": {
+                  "httpMethod": "GET",
+                  "type": "aws",
+                  "uri": {
+                    "Fn::Sub": "arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${getVotestestLambda.Arn}/invocations"
+                  }
+                },
+                "responses": {} 
+              }
+            }
+          }
+        }
+      }
+    },
+    "getVotestestLambda": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "CodeUri": "s3://cervedcosenza/yelb-appserver-lambda.zip",
+        "Handler": "getVotes_adapter.getVotes_adapter",
+        "Runtime": "ruby2.5",
+        "Environment": {
+          "Variables": {
+            "yelbdbhost": "ec2-3-120-205-172.eu-central-1.compute.amazonaws.com"
+          }
+        },
+        "Events": {
+          "Yelbtest": {
+            "Type": "Api",
+            "Properties": {
+              "Path": "/getVotestest",
+              "Method": "POST"
+            }
+          }
+        }
+      }
+    }
+  }
+}
