@@ -5,5 +5,7 @@ def restaurant_adapter(event:, context:)
     $yelbdbport = 5432
     restaurantname = event['pathParameters']['restaurant']
     restaurantcount = restaurantsupdate(restaurantname)
+    # use the return JSON command when you want the API Gateway to manage the http communication  
+    # return JSON.parse(restaurancount)
     { statusCode: 200, body: restaurantcount }
 end

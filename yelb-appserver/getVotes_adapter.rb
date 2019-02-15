@@ -1,9 +1,10 @@
-require_relative 'modules/getVotes'
+require_relative 'modules/getvotes'
 
-def getVotes_adapter(event:, context:)
+def getvotes_adapter(event:, context:)
     $yelbdbhost = ENV['yelbdbhost']
     $yelbdbport = 5432
     votes = getVotes()
+    # use the return JSON command when you want the API Gateway to manage the http communication  
     # return JSON.parse(votes)
     { statusCode: 200, body: votes }
 end

@@ -4,6 +4,8 @@ def pageviews_adapter(event:, context:)
     $redishost = ENV['redishost']
     $port = 6379
     pageviewscount = pageviews()
-    return JSON.parse(pageviewscount)
+    # use the return JSON command when you want the API Gateway to manage the http communication  
+    # return JSON.parse(pageviewscount)
+    { statusCode: 200, body: pageviewscount }
 end
 
