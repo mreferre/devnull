@@ -1,7 +1,7 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../environments/environment';
-import { EnvService } from '../env.service';
+import { EnvService } from '../app/env.service';
 import { Headers, Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
                ) {}
 
 public appserver = environment.appserver_env;
-public apiUrl = window.__env.apiUrl;
+public apiUrl: EnvService;
 colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
     };
