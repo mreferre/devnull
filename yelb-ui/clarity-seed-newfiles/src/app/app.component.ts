@@ -1,6 +1,7 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../environments/environment';
+import { EnvService } from '../env.service';
 import { Headers, Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -19,6 +20,7 @@ export class AppComponent implements OnInit {
                ) {}
 
 public appserver = environment.appserver_env;
+public apiUrl = window.__env.apiUrl;
 colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
     };
@@ -31,7 +33,7 @@ view: any[] = [700, 200];
 ngOnInit(){this.getvotes(); this.getstats()}
 
 getvotes(): void {
-    const url = `${this.appserver}/api/getvotes`;
+    const url = `${this.apiUrl}/api/getvotes`;
     console.log("connecting to app server " + url);
     this.http.get(url)
                 .map((res: Response) => res.json())
@@ -39,7 +41,7 @@ getvotes(): void {
     }
 
 getstats(): void {
-    const url = `${this.appserver}/api/getstats`;
+    const url = `${this.apiUrl}/api/getstats`;
     console.log("connecting to app server " + url);
     this.http.get(url)
                 .map((res: Response) => res.json())
@@ -47,7 +49,7 @@ getstats(): void {
     }
 
 vote(restaurant: string): void {
-    const url = `${this.appserver}/api/${restaurant}`;
+    const url = `${this.apiUrl}/api/${restaurant}`;
     console.log("connecting to app server " + url);
     this.http.get(url)
                 .map((res: Response) => res.json())
