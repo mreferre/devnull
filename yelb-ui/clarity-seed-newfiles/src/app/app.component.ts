@@ -20,7 +20,6 @@ export class AppComponent implements OnInit {
                ) {}
 
 public appserver = environment.appserver_env;
-public apiUrl = env.apiUrl;
 colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
     };
