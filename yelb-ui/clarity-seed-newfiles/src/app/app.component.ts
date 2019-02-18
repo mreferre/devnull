@@ -19,8 +19,7 @@ export class AppComponent implements OnInit {
                 private http:  Http
                ) {}
 
-public appserver = environment.appserver_env;
-public apiUrl = 'eleac5nshk.execute-api.eu-central-1.amazonaws.com';
+public appserver = 'http://eleac5nshk.execute-api.eu-central-1.amazonaws.com';
 public env: EnvService;
 colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
@@ -34,7 +33,7 @@ view: any[] = [700, 200];
 ngOnInit(){this.getvotes(); this.getstats()}
 
 getvotes(): void {
-    const url = `${this.apiUrl}/api/getvotes`;
+    const url = `${this.appserver}/api/getvotes`;
     console.log("connecting to app server " + url);
     this.http.get(url)
                 .map((res: Response) => res.json())
@@ -42,7 +41,7 @@ getvotes(): void {
     }
 
 getstats(): void {
-    const url = `${this.apiUrl}/api/getstats`;
+    const url = `${this.appserver}/api/getstats`;
     console.log("connecting to app server " + url);
     this.http.get(url)
                 .map((res: Response) => res.json())
@@ -50,7 +49,7 @@ getstats(): void {
     }
 
 vote(restaurant: string): void {
-    const url = `${this.apiUrl}/api/${restaurant}`;
+    const url = `${this.appserver}/api/${restaurant}`;
     console.log("connecting to app server " + url);
     this.http.get(url)
                 .map((res: Response) => res.json())
