@@ -1,0 +1,30 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - echo installing angular/cli...
+      - npm install -g @angular/cli       
+  pre_build:
+    commands:
+      - cd yelb-ui 
+      - git clone https://github.com/vmware/clarity-seed.git
+      - cd clarity-seed
+      - git checkout -b f3250ee26ceb847f61bb167a90dc957edf6e7f43
+      - cp ../clarity-seed-newfiles/src/index.html ./src/index.html
+      - cp ../clarity-seed-newfiles/src/styles.css ./src/styles.css
+      - cp ../clarity-seed-newfiles/src/env.js ./src/env.js
+      - cp ../clarity-seed-newfiles/src/app/app* ./src/app
+      - cp ../clarity-seed-newfiles/src/environments/env* ./src/environments
+      - cp ../clarity-seed-newfiles/src/app/env* ./src/app
+      - cp ../clarity-seed-newfiles/package.json ./package.json
+      - cp ../clarity-seed-newfiles/angular-cli.json ./.angular-cli.json
+      - rm -r ./src/app/home
+      - rm -r ./src/app/about
+      - cd src
+      - npm install      
+  build:
+    commands:
+      - ng build 
+  post_build:
+    commands:
+      - echo check the bucket
