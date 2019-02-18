@@ -24,7 +24,8 @@ phases:
       - npm install      
   build:
     commands:
-      - ng build 
+      - ng build --output-path=./prod/dist/
+      - aws s3 cp ./prod/dist/ s3://wildrydes-mreferre --recursive --include "*" 
   post_build:
     commands:
       - echo check the bucket
