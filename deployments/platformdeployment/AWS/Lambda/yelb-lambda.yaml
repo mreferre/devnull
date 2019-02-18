@@ -128,7 +128,7 @@ Resources:
   getvotesLambda:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://cervedcosenza/yelb-appserver-lambda-200v.zip
+      CodeUri: s3://cervedcosenza/yelb-appserver-lambda-200v2.zip
       Handler: getvotes_adapter.getvotes_adapter
       Runtime: ruby2.5
       Environment:
@@ -149,7 +149,7 @@ Resources:
   getstatsLambda:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://cervedcosenza/yelb-appserver-lambda-200v.zip
+      CodeUri: s3://cervedcosenza/yelb-appserver-lambda-200v2.zip
       Handler: getstats_adapter.getstats_adapter
       Runtime: ruby2.5
       Environment:
@@ -170,7 +170,7 @@ Resources:
   hostnameLambda:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://cervedcosenza/yelb-appserver-lambda-200v.zip
+      CodeUri: s3://cervedcosenza/yelb-appserver-lambda-200v2.zip
       Handler: hostname_adapter.hostname_adapter
       Runtime: ruby2.5
       Environment:
@@ -191,7 +191,7 @@ Resources:
   pageviewsLambda:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://cervedcosenza/yelb-appserver-lambda-200v.zip
+      CodeUri: s3://cervedcosenza/yelb-appserver-lambda-200v2.zip
       Handler: pageviews_adapter.pageviews_adapter
       Runtime: ruby2.5
       Environment:
@@ -213,7 +213,7 @@ Resources:
   restaurantLambda:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://cervedcosenza/yelb-appserver-lambda-200v.zip
+      CodeUri: s3://cervedcosenza/yelb-appserver-lambda-200v2.zip
       Handler: restaurant_adapter.restaurant_adapter
       Runtime: ruby2.5
       Environment:
