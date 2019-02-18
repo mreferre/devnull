@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
                 private http:  Http
                ) {}
 
-public appserver = 'http://eleac5nshk.execute-api.eu-central-1.amazonaws.com';
+public appserver = 'https://rwhlgqoztl.execute-api.eu-central-1.amazonaws.com';
 public env: EnvService;
 colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
