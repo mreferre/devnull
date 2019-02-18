@@ -20,6 +20,8 @@ export class AppComponent implements OnInit {
                ) {}
 
 public appserver = environment.appserver_env;
+public apiUrl = 'zunsfkirs3.execute-api.eu-central-1.amazonaws.com';
+public env: EnvService;
 colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
     };
