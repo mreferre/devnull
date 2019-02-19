@@ -23,7 +23,7 @@ import { ROUTING } from "./app.routing";
         ClarityModule.forRoot(),
         ROUTING
     ],
-    providers: [],
+    providers: [EnvServiceProvider],
     bootstrap: [AppComponent]
 })
 export class AppModule {
