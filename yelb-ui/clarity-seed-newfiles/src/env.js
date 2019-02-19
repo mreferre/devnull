@@ -2,7 +2,7 @@
   window.__env = window.__env || {};
 
   // API url
-  window.__env.apiUrl = 'envjs.execute-api.eu-central-1.amazonaws.com';
+  window.__env.apiUrl = 'https://rwhlgqoztl.itworks.eu-central-1.amazonaws.com';
 
   // Whether or not to enable debug mode
   // Setting this to false will disable console output

@@ -16,11 +16,12 @@ import 'rxjs/add/operator/map';
 
 export class AppComponent implements OnInit {
     constructor(private router: Router,
-                private http:  Http
+                private http:  Http,
+                private env: EnvService
                ) {}
 
-public appserver = 'https://rwhlgqoztl.execute-api.eu-central-1.amazonaws.com';
-public env: EnvService;
+public appserver = this.env.apiUrl;
+
 colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
     };
