@@ -12,7 +12,7 @@
 require 'sinatra'
 require 'aws-sdk-dynamodb' 
 require_relative 'modules/pageviews'
-require_relative 'modules/getotes'
+require_relative 'modules/getvotes'
 require_relative 'modules/restaurant'
 require_relative 'modules/hostname'
 require_relative 'modules/getstats'
