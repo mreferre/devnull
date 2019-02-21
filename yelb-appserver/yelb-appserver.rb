@@ -47,6 +47,8 @@ configure :custom do
   set :port, 4567
   set :yelbdbhost => ENV['YELB_DB_SERVER_ENDPOINT']
   set :yelbdbport => 5432
+  set :yelbddbrestaurants => ENV['YELB_DDB_RESTAURANTS']
+  set :yelbddbcache => ENV['YELB_DDB_CACHE']
 end
 
 options "*" do
