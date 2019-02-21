@@ -11,7 +11,7 @@ def pageviews()
                     }
                 }
                 pageviewsrecord = dynamodb.get_item(params)
-                pageviewscount = pageviewrecord.item[count]
+                pageviewscount = pageviewsrecord.item[count]
                 pageviewscount += 1 
                 params = {
                         table_name: $yelbddbcache,
