@@ -10,6 +10,7 @@
 #################################################################################
 
 require 'sinatra'
+require 'aws-sdk-dynamodb' 
 require_relative 'modules/pageviews'
 require_relative 'modules/getVotes'
 require_relative 'modules/restaurant'
