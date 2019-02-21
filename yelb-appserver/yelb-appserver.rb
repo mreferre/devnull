@@ -12,7 +12,7 @@
 require 'sinatra'
 require 'aws-sdk-dynamodb' 
 require_relative 'modules/pageviews'
-require_relative 'modules/getVotes'
+require_relative 'modules/getotes'
 require_relative 'modules/restaurant'
 require_relative 'modules/hostname'
 require_relative 'modules/getstats'
@@ -90,7 +90,7 @@ get '/api/getvotes' do
     headers 'Access-Control-Allow-Headers' => 'Authorization,Accepts,Content-Type,X-CSRF-Token,X-Requested-With'
     headers 'Access-Control-Allow-Methods' => 'GET,POST,PUT,DELETE,OPTIONS'
     content_type 'application/json'
-    @votes = getVotes()
+    @votes = getvotes()
 end #get /api/getvotes 
 
 get '/api/ihop' do
