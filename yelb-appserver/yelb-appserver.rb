@@ -50,6 +50,8 @@ configure :custom do
   set :yelbdbport => 5432
   set :yelbddbrestaurants => ENV['YELB_DDB_RESTAURANTS']
   set :yelbddbcache => ENV['YELB_DDB_CACHE']
+  set :awsregion => ENV['AWS_REGION']
+  
 end
 
 options "*" do
@@ -65,6 +67,7 @@ $yelbdbhost = settings.yelbdbhost
 $redishost = settings.redishost
 $yelbddbcache = settings.yelbddbcache
 $yelbddbrestaurants = settings.yelbddbrestaurants
+$awsregion = settings.awsregion
 
 get '/api/pageviews' do
     headers 'Access-Control-Allow-Origin' => '*'

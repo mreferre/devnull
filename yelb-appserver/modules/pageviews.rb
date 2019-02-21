@@ -3,7 +3,7 @@ require 'aws-sdk-dynamodb'
 
 def pageviews()
         if defined?($yelbddbcache) 
-                dynamodb = Aws::DynamoDB::Client.new
+                dynamodb = Aws::DynamoDB::Client.new(region: $awsregion)
                 params = {
                     table_name: $yelbddbcache,
                     key: {
