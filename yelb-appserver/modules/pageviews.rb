@@ -11,14 +11,14 @@ def pageviews()
                     }
                 }
                 pageviewsrecord = dynamodb.get_item(params)
-                pageviewscount = pageviewsrecord.item['count']
+                pageviewscount = pageviewsrecord.item['pageviewscount']
                 pageviewscount += 1 
                 params = {
                         table_name: $yelbddbcache,
                         key: {
                             counter: 'pageviews'
                         },
-                        update_expression: 'set count = :c',
+                        update_expression: 'set pageviewscount = :c',
                         expression_attribute_values: {':c' => pageviewscount},
                         return_values: 'UPDATED_NEW'
                 }
