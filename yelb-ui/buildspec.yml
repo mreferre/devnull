@@ -18,6 +18,7 @@ phases:
       - cp ../clarity-seed-newfiles/src/app/env* ./src/app
       - cp ../clarity-seed-newfiles/package.json ./package.json
       - cp ../clarity-seed-newfiles/angular-cli.json ./.angular-cli.json
+      - sed -i -- 's#public appserver = environment.appserver_env#public appserver = this.env.apiUrl#g' ./src/app/app.component.ts
       - rm -r ./src/app/home
       - rm -r ./src/app/about
       - cd src

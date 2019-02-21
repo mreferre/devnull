@@ -20,7 +20,15 @@ export class AppComponent implements OnInit {
                 private env: EnvService
                ) {}
 
-public appserver = this.env.apiUrl;
+/** Here we set the appserver endpoint variable. 
+If you are using the nginx redirect method (used in the bare metal, EC2 and containers deployment) leave it as is:
+>> public appserver    =    environment.appserver_env;
+If you want to take advantage of the env.js file (used in the serverless S3 static web hosting use case) then change it to:
+>> public appserver    =    this.env.apiUrl;
+This will set the endpoint to the value found in env.js
+*/
+
+public appserver = environment.appserver_env;
 
 colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
