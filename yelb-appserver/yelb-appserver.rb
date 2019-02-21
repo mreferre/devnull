@@ -63,6 +63,8 @@ end
 
 $yelbdbhost = settings.yelbdbhost
 $redishost = settings.redishost
+$yelbddbcache = settings.yelbddbcache
+$yelbddbrestaurants = settings.yelbddbrestaurants
 
 get '/api/pageviews' do
     headers 'Access-Control-Allow-Origin' => '*'
