@@ -26,7 +26,7 @@ def pageviews()
         else 
                 puts $redishost
                 redis = Redis.new
-                redis = Redis.new(:host => $redishost, :port => $port)
+                redis = Redis.new(:host => $redishost, :port => 6379)
                 redis.incr("pageviews")
                 pageviewscount = redis.get("pageviews")
                 redis.quit()
