@@ -7,22 +7,22 @@ def pageviews()
                 params = {
                     table_name: $yelbddbcache,
                     key: {
-                        counter: pageviews
+                        counter: 'pageviews'
                     }
                 }
-                pageviewsitem = dynamodb.get_item(params)
-                pageviewscount = pageviewsitem[count]
+                pageviewsrecord = dynamodb.get_item(params)
+                pageviewscount = pageviewrecord.item[count]
                 pageviewscount += 1 
                 params = {
                         table_name: $yelbddbcache,
                         key: {
-                            counter: pageviews
+                            counter: 'pageviews'
                         },
                         update_expression: 'set count = :c',
                         expression_attribute_values: {':c' => pageviewscount},
                         return_values: 'UPDATED_NEW'
                 }
-                pageviewscount = dynamodb.update_item(params)
+                pageviewrecord = dynamodb.update_item(params)
         else 
                 redis = Redis.new
                 redis = Redis.new(:host => $redishost, :port => 6379)
