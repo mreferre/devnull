@@ -61,8 +61,6 @@ options "*" do
   halt HTTP_STATUS_OK
 end
 
-put :yelbdbhost 
-
 get '/api/pageviews' do
     headers 'Access-Control-Allow-Origin' => '*'
     headers 'Access-Control-Allow-Headers' => 'Authorization,Accepts,Content-Type,X-CSRF-Token,X-Requested-With'

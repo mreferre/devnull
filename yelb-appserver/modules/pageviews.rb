@@ -24,6 +24,7 @@ def pageviews()
                 }
                 pageviewscount = dynamodb.update_item(params)
         else 
+                put "host redis e " + $redishost
                 redis = Redis.new
                 redis = Redis.new(:host => $redishost, :port => $port)
                 redis.incr("pageviews")
