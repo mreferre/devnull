@@ -65,7 +65,7 @@ end
 
 $yelbdbhost = settings.yelbdbhost
 $redishost = settings.redishost
-if defined?(settings.yelbddbcache) then $yelbddbcache = settings.yelbddbcache end 
+$yelbddbcache = settings.yelbddbcache
 $yelbddbrestaurants = settings.yelbddbrestaurants
 $awsregion = settings.awsregion
 
