@@ -23,6 +23,7 @@ def pageviews()
                         return_values: 'UPDATED_NEW'
                 }
                 pageviewrecord = dynamodb.update_item(params)
+                pageviewscount = pageviewsrecord.item['pageviewscount'].to_i
         else 
                 redis = Redis.new
                 redis = Redis.new(:host => $redishost, :port => 6379)
