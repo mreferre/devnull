@@ -11,8 +11,8 @@ def restaurantsdbread(restaurant)
                 name: restaurant
             }
         }
-        restaurantitem = dynamodb.get_item(params)
-        restaurantcount = restaurantitem.item['restaurantcount']
+        restaurantrecord = dynamodb.get_item(params)
+        restaurantcount = restaurantrecord.item['restaurantcount']
     else 
         con = PG.connect  :host => $yelbdbhost,
                         :port => $yelbdbport,
@@ -24,5 +24,5 @@ def restaurantsdbread(restaurant)
         restaurantcount = res.getvalue(0,0)
         con.close
     end
-    return restaurantcount 
+    return restaurantcount.to_s
 end 
