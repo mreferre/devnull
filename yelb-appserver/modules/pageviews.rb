@@ -2,7 +2,7 @@ require 'redis'
 require 'aws-sdk-dynamodb'
 
 def pageviews()
-        if defined?($yelbddbcache) 
+        if ($yelbddbcache != nil && $yelbddbcache != "") then
                 dynamodb = Aws::DynamoDB::Client.new(region: $awsregion)
                 params = {
                     table_name: $yelbddbcache,

@@ -69,14 +69,6 @@ if defined?(settings.yelbddbcache) then $yelbddbcache = settings.yelbddbcache en
 $yelbddbrestaurants = settings.yelbddbrestaurants
 $awsregion = settings.awsregion
 
-puts $yelbdbhost
-puts $redishost
-puts $yelbddbcache
-puts $yelbddbrestaurants
-puts $awsregion
-
-
-
 get '/api/pageviews' do
     headers 'Access-Control-Allow-Origin' => '*'
     headers 'Access-Control-Allow-Headers' => 'Authorization,Accepts,Content-Type,X-CSRF-Token,X-Requested-With'
