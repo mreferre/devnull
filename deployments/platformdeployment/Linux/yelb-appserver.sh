@@ -10,8 +10,7 @@ export RACK_ENV="${RACK_ENV:-custom}"
 export REDIS_SERVER_ENDPOINT="${REDIS_SERVER_ENDPOINT:-localhost}"
 export YELB_DB_SERVER_ENDPOINT="${YELB_DB_SERVER_ENDPOINT:-localhost}"
 # If you want to connect to DDB you need to:
-# set $YELB_DDB_RESTAURANTS / $YELB_DDB_CACHE instead
-# add the $AWS_REGION variable 
+# set $YELB_DDB_RESTAURANTS / $YELB_DDB_CACHE / $AWS_REGION instead of $YELB_DB_SERVER_ENDPOINT / $REDIS_SERVER_ENDPOINT
 ###########################################################
 ###########           END OF USER INPUTS        ###########
 ###########################################################
